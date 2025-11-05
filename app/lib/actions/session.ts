@@ -1,4 +1,4 @@
-// import 'server-only';
+import 'server-only';
 // import { query } from '@/app/lib/db';
 // import { cookies } from 'next/headers';
 // import { redirect } from 'next/navigation';
@@ -69,10 +69,11 @@
 // }
 //
 
-import 'server-only'
-import { cookies } from 'next/headers'
 
-export async function createSession(userId: string) {
+import { cookies } from 'next/headers'
+import {query} from "@/app/lib/db";
+
+export async function createSession(userId: number) {
     const expiresAt = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000)
     const algorithm = { name: "AES-GCM", iv: new Uint8Array(12) };
     const key = await crypto.subtle.generateKey(
@@ -87,6 +88,12 @@ export async function createSession(userId: string) {
     const sessionBuffer = await crypto.subtle.encrypt(algorithm, key, data);
     const session = Buffer.from(sessionBuffer).toString('base64');
     const cookieStore = await cookies()
+
+    try {
+        await query('INSERT INTO customer_sessions (customer_id, token) VALUES ($1, $2)', [userId, session]);
+    }  catch (e: unknown) {
+        console.error(e);
+    }
 
     cookieStore.set('session', session, {
         httpOnly: true,

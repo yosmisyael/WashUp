@@ -3,22 +3,29 @@
 import {z} from "zod";
 import {query} from "@/app/lib/db";
 import {createSession} from "@/app/lib/actions/session";
+import {redirect} from "next/navigation";
 
 const LoginSchema = z.object({
     email: z.email('Invalid email address'),
     password: z.string().min(8, 'Password must be at least 8 characters'),
 });
 
+export type LoginFormState = {
+    message?: string;
+    errors?: string[];
+};
+
 export async function loginCustomer(
-    prevState: { message: string },
+    prevState: LoginFormState,
     formData: FormData,
 ) {
     const data = Object.fromEntries(formData);
 
     const validatedFields = LoginSchema.safeParse(data);
+
     if (!validatedFields.success) {
         return {
-            message: z.treeifyError(validatedFields.error),
+            errors: validatedFields.error.issues.map(e => e.message),
         };
     }
 
@@ -26,7 +33,7 @@ export async function loginCustomer(
 
     try {
         const passwordQuery = await query(
-            'SELECT password FROM customers WHERE email = $1',
+            'SELECT password, id FROM customers WHERE email = $1',
             [email]
         );
         if (passwordQuery.rows.length === 0) {
@@ -45,7 +52,11 @@ export async function loginCustomer(
         }
 
         await createSession(customer.id);
+
     } catch (e: unknown) {
         console.error(e);
+        return { message: 'Login failed, please try again later.' };
     }
+
+    redirect('/customers/dashboard');
 }

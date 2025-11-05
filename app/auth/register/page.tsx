@@ -129,12 +129,18 @@ const Register: React.FC = () => {
 
                 {/* Form State */}
                 <p className="text-base text-red-600">
-                    <span className="font-semibold">Invalid Input:</span>
-                        {
-                            state?.errors?.map((e, index) => (
-                                <span key={index} className="block"> • {e} </span>
-                            ))
-                        }
+                    { state.errors && (
+                        <span className="font-semibold">Invalid Input:</span>
+                    )}
+                    {
+                        state?.errors?.map((e, index) => (
+                            <span key={index} className="block"> • {e} </span>
+                        ))
+                    }
+
+                    { state.message && (
+                        <span className="font-semibold">{ state.message }</span>
+                    )}
                 </p>
 
                 {/* Checkbox */}

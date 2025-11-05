@@ -1,6 +1,7 @@
 "use client";
 
 import React, {
+    useActionState,
     useState,
 } from 'react';
 import {
@@ -12,16 +13,16 @@ import {
 import Logo from "@/app/components/atoms/Logo";
 import Button from "@/app/components/atoms/Button";
 import {InputWithIcon, PasswordInput} from "@/app/components/atoms/Input";
+import {loginCustomer, LoginFormState} from "@/app/auth/login/actions";
+
+const initialState: LoginFormState = {}
 
 const Login: React.FC = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [remember, setRemember] = useState(false);
 
-    const handleSubmit = (e: React.FormEvent) => {
-        e.preventDefault();
-        console.log({ email, password, remember });
-    };
+    const [state, formAction, pending] = useActionState(loginCustomer, initialState);
 
     return (
         <div className="mx-auto bg-white p-8 sm:p-10 rounded-xl shadow-lg w-full max-w-md">
@@ -35,7 +36,7 @@ const Login: React.FC = () => {
             </div>
 
             {/* Form */}
-            <form className="mt-8 space-y-5" onSubmit={handleSubmit}>
+            <form className="mt-8 space-y-5" action={formAction}>
                 {/* Email Address */}
                 <div>
                     <label
@@ -78,6 +79,22 @@ const Login: React.FC = () => {
                         Password must be at least 8 characters long
                     </p>
                 </div>
+
+                {/* Form State */}
+                <p className="text-base text-red-600">
+                    { state.errors && (
+                        <span className="font-semibold">Invalid Input:</span>
+                    )}
+                    {
+                        state?.errors?.map((e, index) => (
+                            <span key={index} className="block"> • {e} </span>
+                        ))
+                    }
+
+                    { state.message && (
+                        <span className="font-semibold">{ state.message }</span>
+                    )}
+                </p>
 
                 {/* Checkbox */}
                 <div className="flex items-start space-x-2 pt-2">

@@ -46,14 +46,11 @@ export async function customerRegister (
             hashedPassword,
         ]);
 
-        const result: boolean = rows[0].success;
+        const result: boolean = rows[0].create_new_customer.success;
 
         if (!result) {
             return { message: 'Registration failed, please try again' };
         }
-
-        redirect('/auth/login?message=Account+created+successfully.+Please+log+in.');
-
     } catch (error: unknown) {
         if (error instanceof DatabaseError && error.code === '23505') {
             return { message: 'An account with this email already exists.' };
@@ -61,4 +58,6 @@ export async function customerRegister (
         console.error('Database error:', error);
         return { message: 'Something went wrong. Please try again.' };
     }
+
+    redirect('/auth/login?message=Account+created+successfully.+Please+log+in.');
 }
