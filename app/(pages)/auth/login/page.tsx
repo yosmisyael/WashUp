@@ -13,7 +13,7 @@ import {
 import Logo from "@/app/components/atoms/Logo";
 import Button from "@/app/components/atoms/Button";
 import {InputWithIcon, PasswordInput} from "@/app/components/atoms/Input";
-import {loginCustomer, LoginFormState} from "@/app/auth/login/actions";
+import {loginCustomer, LoginFormState} from "@/app/(pages)/auth/login/actions";
 
 const initialState: LoginFormState = {}
 

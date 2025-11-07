@@ -15,7 +15,7 @@ import {
 import Logo from "@/app/components/atoms/Logo";
 import Button from "@/app/components/atoms/Button";
 import {InputWithIcon, PasswordInput} from "@/app/components/atoms/Input";
-import {customerRegister, RegisterFormState} from "@/app/auth/register/actions";
+import {customerRegister, RegisterFormState} from "@/app/(pages)/auth/register/actions";
 
 const initialState: RegisterFormState = {
     message: '',
@@ -169,7 +169,7 @@ const Register: React.FC = () => {
                 <Button
                     variant="primary"
                     type="submit"
-                    className="w-full !mt-6 py-3"
+                    className="w-full mt-6! py-3"
                     disabled={pending}
                 >
                     Create Account
@@ -178,9 +178,9 @@ const Register: React.FC = () => {
 
             {/* Separator */}
             <div className="flex items-center my-6">
-                <hr className="flex-grow border-gray-200"/>
+                <hr className="grow border-gray-200"/>
                 <span className="mx-4 text-sm text-gray-500">Or continue with</span>
-                <hr className="flex-grow border-gray-200"/>
+                <hr className="grow border-gray-200"/>
             </div>
 
             {/* Social Logins */}
