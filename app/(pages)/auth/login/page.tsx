@@ -149,7 +149,7 @@ const Login: React.FC = () => {
             {/* Sign In Link */}
             <p className="text-sm text-center text-gray-600 mt-8">
                 Didn&#39;t have an account yet?{' '}
-                <a href="/auth/register" className="font-medium text-indigo-600 hover:underline">
+                <a href="/(pages)/auth/register" className="font-medium text-indigo-600 hover:underline">
                     Sign Up
                 </a>
             </p>
