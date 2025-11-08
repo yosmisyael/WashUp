@@ -1,9 +1,9 @@
 "use client";
 
-import HeroBanner from "@/app/components/molecules/customers/HeroBanner";
-import OrderCard from "@/app/components/molecules/customers/OrderCard";
-import QuickActionCard from "@/app/components/molecules/customers/QuickActionCard";
-import RecentOrderCard from "@/app/components/molecules/customers/RecentOrderCard";
+import HeroBanner from "@/app/components/molecules/customers/dashboard/HeroBanner";
+import OrderCard from "@/app/components/molecules/customers/dashboard/OrderCard";
+import QuickActionCard from "@/app/components/molecules/customers/dashboard/QuickActionCard";
+import RecentOrderCard from "@/app/components/molecules/customers/dashboard/RecentOrderCard";
 
 export default function CustomerDashboardPage() {
   return (

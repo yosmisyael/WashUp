@@ -1,7 +1,7 @@
 "use client";
 
 import { Bell } from "lucide-react";
-import IconButton from "@/app/components/atoms/customers/IconButton";
+import IconButton from "@/app/components/atoms/customers/dashboard/IconButton";
 
 export default function NotificationBell() {
   return (

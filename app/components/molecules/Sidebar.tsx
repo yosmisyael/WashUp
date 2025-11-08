@@ -1,6 +1,6 @@
 "use client";
 
-import SidebarMenu from "@/app/components/molecules/customers/SidebarMenu";
+import SidebarMenu from "@/app/components/molecules/customers/dashboard/SidebarMenu";
 import { LogOut } from "lucide-react";
 import { useSidebar } from "@/app/context/SidebarContext";
 import Logo from "@/app/components/atoms/Logo";

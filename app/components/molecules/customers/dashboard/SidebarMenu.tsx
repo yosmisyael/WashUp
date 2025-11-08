@@ -1,7 +1,7 @@
 "use client";
 
 import { Home, PlusCircle, ShoppingBag, MapPin, Ticket, User } from "lucide-react";
-import NavItem from "@/app/components/atoms/customers/NavItem";
+import NavItem from "@/app/components/atoms/customers/dashboard/NavItem";
 
 export default function SidebarMenu() {
   return (

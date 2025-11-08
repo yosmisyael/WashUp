@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { ChevronDown } from "lucide-react";
-import Avatar from "@/app/components/atoms/customers/Avatar";
+import Avatar from "@/app/components/atoms/customers/dashboard/Avatar";
 
 export default function UserMenu() {
   const [open, setOpen] = useState(false);
