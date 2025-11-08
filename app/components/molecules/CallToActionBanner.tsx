@@ -4,7 +4,7 @@ import {Apple, Smartphone} from "lucide-react";
 
 const CallToActionBanner: React.FC = () => {
     return (
-        <section className="bg-gradient-to-r from-secondary to-primary">
+        <section className="bg-linear-to-r from-secondary to-primary">
             <div className="container mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 py-16 md:py-20 text-center">
                 <h2 className="text-3xl font-extrabold text-white">
                     Ready to Transform Your Laundry Experience?
