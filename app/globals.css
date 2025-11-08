@@ -26,3 +26,17 @@ body {
     color: var(--foreground);
     font-family: Arial, Helvetica, sans-serif;
 }
+
+@layer components {
+  .gradient-color {
+    @apply bg-gradient-to-r from-[#2957A0] to-[#3985AA];
+  }
+
+  .primary-color {
+    @apply bg-[#2A5AA1];
+  }
+  
+  .text-primary-color {
+    @apply text-[#2A5AA1];
+  }
+}
