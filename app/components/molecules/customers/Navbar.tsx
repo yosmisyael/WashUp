@@ -8,7 +8,7 @@ export default function Navbar() {
   const { toggleSidebar } = useSidebar();
 
   return (
-    <header className="flex items-center justify-between bg-white border-b shadow-sm px-6 py-3 z-50 relative">
+    <header className="flex items-center justify-between bg-white shadow-sm px-6 py-3 z-50 relative">
       {/* Left Section */}
       <div className="flex items-center gap-3">
         <button

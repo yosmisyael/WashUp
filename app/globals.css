@@ -39,4 +39,8 @@ body {
   .text-primary-color {
     @apply text-[#2A5AA1];
   }
+
+  .bg-layout {
+    @apply bg-[#F4F7F6];
+  }
 }

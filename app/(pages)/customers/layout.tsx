@@ -1,14 +1,14 @@
 "use client";
 
 import { ReactNode } from "react";
-import Sidebar from "@/app/components/molecules/Sidebar";
-import Navbar from "@/app/components/molecules/Navbar";
+import Sidebar from "@/app/components/molecules/customers/Sidebar";
+import Navbar from "@/app/components/molecules/customers/Navbar";
 import { SidebarProvider } from "@/app/context/SidebarContext";
 
 export default function CustomerLayout({ children }: { children: ReactNode }) {
   return (
     <SidebarProvider>
-      <div className="flex h-screen bg-gray-50 overflow-hidden">
+      <div className="flex h-screen bg-layout overflow-hidden">
         {/* Sidebar */}
         <Sidebar />
 

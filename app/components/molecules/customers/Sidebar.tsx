@@ -12,12 +12,12 @@ export default function Sidebar() {
     <>
       {/* Sidebar utama */}
       <aside
-        className={`fixed top-0 left-0 z-40 w-64 h-screen bg-white border-r shadow-sm flex flex-col transform transition-transform duration-300 ease-in-out
+        className={`fixed top-0 left-0 z-40 w-64 h-screen bg-white shadow-sm flex flex-col transform transition-transform duration-300 ease-in-out
         ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"} 
         lg:translate-x-0`}
       >
         {/* Brand Header */}
-        <div className="flex items-center gap-3 px-6 py-[0.4rem] border-b primary-color">
+        <div className="flex items-center gap-3 px-6 py-[0.4rem] primary-color">
           <div className="bg-white text-white font-bold text-xl p-1.5 rounded-md">
             <Logo size={1.5} />
           </div>
@@ -33,7 +33,7 @@ export default function Sidebar() {
         </div>
 
         {/* Sign Out */}
-        <div className="border-t p-4">
+        <div className="border-t border-gray-200/50 p-4">
           <button className="flex items-center gap-2 text-gray-600 hover:text-red-500 transition-colors text-sm w-full">
             <LogOut size={18} />
             Sign Out
