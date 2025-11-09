@@ -2,8 +2,13 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   images: {
-    domains: [
-      "i.pinimg.com",
+    remotePatterns: [
+        {
+            protocol: "https",
+            hostname: "i.pinimg.com",
+            pathname: "/**",
+        },
+
       // "www.surrey.ac.uk",
       // "images.squarespace-cdn.com",
       // "awsimages.detik.net.id",
