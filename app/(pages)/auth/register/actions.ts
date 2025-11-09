@@ -2,7 +2,8 @@
 
 import { z } from 'zod';
 import { redirect } from 'next/navigation';
-import prisma from "@/app/lib/prisma";
+import prisma from '@/app/lib/prisma';
+import { cookies } from 'next/headers';
 
 const RegisterSchema = z.object({
     name: z.string().min(3, 'Full name must be at least 3 characters'),
@@ -52,5 +53,9 @@ export async function customerRegister (
         return { message: 'Something went wrong. Please try again.' };
     }
 
-    redirect('/auth/login?message=Account+created+successfully.+Please+log+in.');
+    const cookie = await cookies();
+
+    cookie.set('flash_message', 'Account created successfully. Now please login.')
+
+    redirect('/auth/login');
 }
