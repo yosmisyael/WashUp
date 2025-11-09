@@ -1,4 +1,8 @@
 import 'server-only';
+import {JwtPayloadCustomer, signToken} from '@/app/lib/jwt';
+import {cookies} from 'next/headers';
+import prisma from '@/app/lib/prisma';
+
 // import { query } from '@/app/lib/db';
 // import { cookies } from 'next/headers';
 // import { redirect } from 'next/navigation';
@@ -69,36 +73,24 @@ import 'server-only';
 // }
 //
 
+export async function createSession(jwtPayload: JwtPayloadCustomer) {
+    const token = signToken(jwtPayload);
+    
+    await prisma.customerSession.create({
+        data: {
+            token,
+            customerId: jwtPayload.sub,
+        }
+    })
 
-import { cookies } from 'next/headers'
-import {query} from "@/app/lib/db";
+    const cookie = await cookies();
 
-export async function createSession(userId: number) {
-    const expiresAt = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000)
-    const algorithm = { name: "AES-GCM", iv: new Uint8Array(12) };
-    const key = await crypto.subtle.generateKey(
-        {
-            name: 'AES-GCM',
-            length: 256,
-        },
-        true,
-        ['encrypt', 'decrypt']
-    );
-    const data: BufferSource = new TextEncoder().encode(JSON.stringify({ userId, expiresAt }));
-    const sessionBuffer = await crypto.subtle.encrypt(algorithm, key, data);
-    const session = Buffer.from(sessionBuffer).toString('base64');
-    const cookieStore = await cookies()
+    const exp = Bun.env.JWT_AGE!;
 
-    try {
-        await query('INSERT INTO customer_sessions (customer_id, token) VALUES ($1, $2)', [userId, session]);
-    }  catch (e: unknown) {
-        console.error(e);
-    }
-
-    cookieStore.set('session', session, {
+    cookie.set('session', token, {
         httpOnly: true,
-        secure: true,
-        expires: expiresAt,
+        secure: Bun.env.APP_ENV === 'production',
+        expires: parseInt(exp),
         sameSite: 'lax',
         path: '/',
     });

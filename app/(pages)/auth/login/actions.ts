@@ -2,7 +2,7 @@
 
 import {z} from 'zod';
 import {query} from '@/app/lib/db';
-import {createSession} from '@/app/lib/actions/session';
+import {createSession} from '@/app/lib/session';
 import prisma from '@/app/lib/prisma';
 import {redirect} from 'next/navigation';
 import {cookies} from "next/headers";
@@ -66,7 +66,11 @@ export async function loginCustomer(
             return { message: 'Invalid email or password.' };
         }
 
-        await createSession(userQuery.id);
+        await createSession({
+            sub: userQuery.id,
+            name: userQuery.name,
+            email: userQuery.email,
+        });
     } catch (e: unknown) {
         console.error(e);
         return { message: 'Login failed, please try again later.' };
