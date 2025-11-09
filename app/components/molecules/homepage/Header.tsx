@@ -45,7 +45,7 @@ const Header: React.FC = () => {
                     {/* Desktop Auth Buttons */}
                     <div className="hidden md:flex items-center gap-4">
                         <a
-                            href="/(pages)/auth/login"
+                            href="/auth/login"
                             className="text-sm font-medium text-gray-600 hover:text-indigo-600"
                         >
                             Sign in
@@ -83,7 +83,7 @@ const Header: React.FC = () => {
                         ))}
                         <hr className="my-2"/>
                         <a
-                            href="/(pages)/auth/login"
+                            href="/auth/login"
                             className="text-gray-700 hover:bg-gray-100 p-2 rounded-md"
                         >
                             Sign in
