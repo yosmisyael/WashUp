@@ -1,0 +1,245 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider   = "prisma-client"
+  output     = "./generated"
+  engineType = "client"
+  runtime    = "bun"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum ROLE {
+  owner
+  employee
+}
+
+enum ITEM_UNIT {
+  Kg
+  pcs
+}
+
+enum ORDER_STATUS {
+  ON_THE_WAY_TO_PICK_UP @map("on the way to pick up")
+  ON_THE_WAY_TO_DELIVER @map("on the way to deliver")
+  ACCEPTED              @map("accepted")
+  IN_PROGRESS           @map("in progress")
+  DONE                  @map("done")
+}
+
+enum ORDER_TYPE {
+  delivery
+  regular
+}
+
+enum DISCOUNT_TYPE {
+  value
+  percentage
+}
+
+enum PAYMENT_METHOD {
+  CASH
+  QRIS
+}
+
+// ----------------------------------------------
+// Models
+// ----------------------------------------------
+
+model Customer {
+  id                 Int                @id @default(autoincrement())
+  name               String             @db.VarChar(255)
+  email              String             @unique @db.VarChar(255)
+  phone              String?            @db.VarChar(50)
+  password           String             @db.VarChar(255)
+  createdAt          DateTime           @default(now()) @map("created_at") @db.Timestamp(6)
+  locations          Location[]
+  orders             Order[]
+  customerDiscounts  CustomerDiscount[] @relation("CustomerToCustomerDiscount")
+  session            CustomerSession?
+
+  @@map("customers")
+}
+
+model Location {
+  id             Int           @id @default(autoincrement())
+  customerId     Int           @map("customer_id")
+  address        String?       @db.Text
+  information    String?       @db.Text
+  customer       Customer      @relation(fields: [customerId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  pickupOrders   OrderDetail[] @relation("PickupLocation")
+  deliverOrders  OrderDetail[] @relation("DeliverLocation")
+
+  @@map("locations")
+}
+
+model Employee {
+  id              Int               @id @default(autoincrement())
+  name            String            @db.VarChar(255)
+  role            ROLE              @default(employee)
+  startDate       DateTime?         @default(now()) @map("start_date") @db.Timestamp(6)
+  history         EmployeeHistory[]
+  invoices        Invoice[]
+  employeeSession EmployeeSession?
+
+  @@map("employees")
+}
+
+model EmployeeHistory {
+  employeeId Int      @map("employee_id")
+  joinDate   DateTime @map("join_date") @db.Timestamp(6)
+  resignDate DateTime? @default(now()) @map("resign_date") @db.Timestamp(6)
+  employee   Employee @relation(fields: [employeeId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+
+  @@id([employeeId, joinDate])
+  @@map("employee_history")
+}
+
+model Service {
+  id                      Int     @id @default(autoincrement())
+  name                    String  @unique @db.VarChar(255)
+  completionTimeInHours   Int     @map("completion_time_in_hours")
+  price                   Int
+  unit                    ITEM_UNIT
+  descriptions            String  @db.Text
+  items                   Item[]
+
+  @@map("services")
+}
+
+model Order {
+  id            Int            @id @default(autoincrement())
+  customerId    Int            @map("customer_id")
+  notes         String?        @db.Text
+  status        ORDER_STATUS?
+  type          ORDER_TYPE?
+  createdAt     DateTime       @default(now()) @map("created_at") @db.Timestamp(6)
+  customer      Customer       @relation(fields: [customerId], references: [id])
+  orderDetail   OrderDetail?
+  orderPickup   OrderPickup?
+  orderDelivery OrderDelivery?
+  items         Item[]
+  invoice       Invoice?
+
+  @@map("orders")
+}
+
+model OrderDetail {
+  orderId           Int      @map("order_id")
+  pickupLocationId  Int      @map("pickup_location_id")
+  deliverLocationId Int      @map("deliver_location_id")
+  order             Order    @relation(fields: [orderId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  pickupLocation    Location @relation("PickupLocation", fields: [pickupLocationId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  deliverLocation   Location @relation("DeliverLocation", fields: [deliverLocationId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+
+  @@id([orderId])
+  @@map("order_detail")
+}
+
+model OrderPickup {
+  orderId    Int      @id @map("order_id")
+  driverId   Int      @map("driver_id")
+  pickupTime DateTime @map("pickup_time") @db.Timestamp(6)
+  order      Order    @relation(fields: [orderId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+
+  @@map("order_pickups")
+}
+
+model OrderDelivery {
+  orderId     Int      @id @map("order_id")
+  driverId    Int      @map("driver_id")
+  arrivalTime DateTime @map("arrival_time") @db.Timestamp(6)
+  order       Order    @relation(fields: [orderId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+
+  @@map("order_deliveries")
+}
+
+model Item {
+  id        Int     @id @default(autoincrement())
+  orderId   Int     @map("order_id")
+  serviceId Int     @map("service_id")
+  quantity  Float?  @db.DoublePrecision
+  notes     String? @db.Text
+  order     Order   @relation(fields: [orderId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  service   Service @relation(fields: [serviceId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+
+  @@map("items")
+}
+
+model Discount {
+  id                Int                @id @default(autoincrement())
+  name              String             @db.VarChar
+  value             Int?
+  type              DISCOUNT_TYPE
+  startDate         DateTime?          @default(now()) @map("start_date") @db.Timestamp(6)
+  endDate           DateTime           @map("end_date") @db.Timestamp(6)
+  customerDiscounts CustomerDiscount[] @relation("DiscountToCustomerDiscount")
+
+  @@map("discounts")
+}
+
+model CustomerDiscount {
+  id                Int               @id @default(autoincrement())
+  customerId        Int               @map("customer_id")
+  discountId        Int               @map("discount_id")
+  limitUsage        Int               @map("limit_usage")
+  timeUsed          Int               @default(0) @map("time_used")
+  customer          Customer          @relation("CustomerToCustomerDiscount", fields: [customerId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  discount          Discount          @relation("DiscountToCustomerDiscount", fields: [discountId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  appliedDiscounts  AppliedDiscount[]
+
+  @@unique([customerId, discountId], map: "constraint_unique_customer_discount")
+  @@map("customer_discounts")
+}
+
+model CustomerSession {
+  id         Int      @id @default(autoincrement())
+  customerId Int      @unique @map("customer_id")
+  token      String?  @db.VarChar(255)
+  customer   Customer @relation(fields: [customerId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+
+  @@map("customer_sessions")
+}
+
+model EmployeeSession {
+  id         Int      @id @default(autoincrement())
+  employeeId Int      @unique @map("employee_id")
+  token      String   @db.VarChar(255)
+  employee   Employee @relation(fields: [employeeId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+
+  @@map("employee_sessions")
+}
+
+model Invoice {
+  id              Int               @id @default(autoincrement())
+  orderId         Int               @unique @map("order_id")
+  employeeId      Int               @map("employee_id")
+  entryDate       DateTime          @map("entry_date") @db.Timestamp(6)
+  completionDate  DateTime          @map("completion_date") @db.Timestamp(6)
+  grandTotal      Int               @map("grand_total")
+  payment         PAYMENT_METHOD?
+  isPaid          Boolean?          @map("is_paid")
+  paidAt          DateTime?         @map("paid_at") @db.Timestamp(6)
+  employee        Employee          @relation(fields: [employeeId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  order           Order             @relation(fields: [orderId], references: [id])
+  appliedDiscounts AppliedDiscount[]
+
+  @@map("invoices")
+}
+
+model AppliedDiscount {
+  invoiceId          Int              @map("invoice_id")
+  customerDiscountId Int              @map("customer_discount_id")
+  invoice            Invoice          @relation(fields: [invoiceId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  customerDiscount   CustomerDiscount @relation(fields: [customerDiscountId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+
+  @@id([invoiceId, customerDiscountId])
+  @@map("applied_discount")
+}

@@ -129,9 +129,11 @@ const Register: React.FC = () => {
 
                 {/* Form State */}
                 <p className="text-base text-red-600">
-                    { state.errors && (
-                        <span className="font-semibold">Invalid Input:</span>
-                    )}
+                    {
+                        state.errors && state.errors.length != 0 && (
+                            <span className="font-semibold">Invalid Input:</span>
+                        )
+                    }
                     {
                         state?.errors?.map((e, index) => (
                             <span key={index} className="block"> • {e} </span>
