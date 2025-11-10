@@ -7,7 +7,6 @@ import { useSidebar } from "@/context/SidebarContext"; // Konteks ini bisa dipak
 
 // 1. Definisikan props yang ingin kita terima
 interface NavbarProps {
-  title: string;
   userName: string;
   userRole: string;
   userAvatar: string;
@@ -16,7 +15,6 @@ interface NavbarProps {
 
 // 2. Terima props tersebut di dalam fungsi
 export default function Navbar({
-  title,
   userName,
   userRole,
   userAvatar,
@@ -34,8 +32,6 @@ export default function Navbar({
         >
           <Menu className="w-5 h-5" />
         </button>
-        {/* 3. Gunakan props 'title' */}
-        <h2 className="text-lg font-semibold text-gray-800">{title}</h2>
       </div>
 
       {/* Right Section */}
