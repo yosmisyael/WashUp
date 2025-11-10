@@ -16,7 +16,7 @@ export default function OwnerDashboardPage() {
   return (
     <>
       {/* Header Halaman */}
-      <div className="flex justify-between items-center mb-6">
+      <div className="flex justify-between items-center mb-6 text-black">
         <div>
           <h1 className="text-3xl font-bold">Executive Dashboard</h1>
           <p className="text-gray-600">Monitor your business performance and key metrics</p>
@@ -27,7 +27,7 @@ export default function OwnerDashboardPage() {
       </div>
 
       {/* Grid Kartu Statistik */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 text-black">
         <StatCard
           title="Total Revenue"
           value="$24,580"
@@ -78,7 +78,7 @@ export default function OwnerDashboardPage() {
       </div>
 
       {/* Grid Chart */}
-      <div className="mt-8 grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="mt-8 grid grid-cols-1 lg:grid-cols-2 gap-6 text-black">
         <RevenueChart />
         <TopServicesChart />
         <NewVsRepeatingChart />
