@@ -4,7 +4,7 @@ import Logo from '@/components/atoms/Logo';
 import {InputWithIcon, PasswordInput} from '@/components/atoms/Input';
 import {Apple, Chrome, Lock, Mail} from 'lucide-react';
 import Button from '@/components/atoms/Button';
-import {clearFlashMessages, loginCustomer, LoginFormState} from '@/app/(pages)/auth/login/actions';
+import {clearFlashMessages, loginCustomer, LoginFormState} from '@/app/(auth)/customers/login/actions';
 import React, {
     useActionState,
     useEffect,
@@ -151,7 +151,7 @@ export default function CustomerLoginForm({ flashMessage }: CustomerLoginFormPro
             {/* Sign In Link */}
             <p className='text-sm text-center text-gray-600 mt-8'>
                 Didn&#39;t have an account yet?{' '}
-                <a href='/auth/register' className='font-medium text-indigo-600 hover:underline'>
+                <a href='/customers/register' className='font-medium text-indigo-600 hover:underline'>
                     Sign Up
                 </a>
             </p>

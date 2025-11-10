@@ -65,7 +65,6 @@ const servicesData = [
 export function ServicesTable() {
   return (
     <div className="bg-white p-6 shadow rounded-lg text-black">
-      {/* Header Tabel */}
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-xl font-semibold">All Services</h2>
         <div className="flex items-center gap-2">
@@ -80,11 +79,9 @@ export function ServicesTable() {
         </div>
       </div>
 
-      {/* Tabel */}
       <table className="w-full table-auto">
-        {/* 3. BUAT GARIS LEBIH TERANG */}
         <thead className="text-left text-sm text-gray-500">
-          <tr className="border-b border-gray-200"> {/* <-- Diubah ke gray-200 */}
+          <tr className="border-b border-gray-200">
             <th className="py-3 px-4">Service Name</th>
             <th className="py-3 px-4">Price</th>
             <th className="py-3 px-4">Unit</th>
@@ -93,12 +90,10 @@ export function ServicesTable() {
             <th className="py-3 px-4">Actions</th>
           </tr>
         </thead>
-        {/* 4. BUAT GARIS LEBIH TERANG */}
-        <tbody className="divide-y divide-gray-200"> {/* <-- Diubah ke gray-200 */}
+        <tbody className="divide-y divide-gray-200">
           {servicesData.map((service) => (
             <tr key={service.name} className="hover:bg-gray-50">
               <td className="p-4">
-                {/* 5. TAMBAHKAN IKON DI SINI */}
                 <div className="flex items-center">
                   <div className={`p-2 rounded-lg mr-3 ${service.iconColor}`}>
                     <service.Icon className="w-5 h-5" />
@@ -130,7 +125,6 @@ export function ServicesTable() {
         </tbody>
       </table>
 
-      {/* Paginasi */}
       <div className="mt-6">
         <PaginationControl />
       </div>

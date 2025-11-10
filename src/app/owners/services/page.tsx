@@ -7,16 +7,13 @@ import { ServicesTable } from '@/components/organisms/owners/services/ServicesTa
 export default function ServicesPage() {
   return (
     <>
-      {/* 1. Header Halaman */}
       <ServicesHeader />
 
-      {/* 2. Grid Statistik */}
-      <div className="mb-8"> {/* Memberi jarak antara Stats dan Table */}
+      <div className="mb-8">
         <ServicesStats />
       </div>
 
-      {/* 3. Tabel Layanan (Sudah jadi!) */}
-      <ServicesTable /> {/* <-- 2. PANGGIL KOMPONEN */}
+      <ServicesTable />
     </>
   );
 }

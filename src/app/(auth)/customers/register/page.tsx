@@ -15,7 +15,7 @@ import {
 import Logo from "@/components/atoms/Logo";
 import Button from "@/components/atoms/Button";
 import {InputWithIcon, PasswordInput} from "@/components/atoms/Input";
-import {customerRegister, RegisterFormState} from "@/app/(pages)/auth/register/actions";
+import {customerRegister, RegisterFormState} from "@/app/(auth)/customers/register/actions";
 
 const initialState: RegisterFormState = {
     message: '',
@@ -206,7 +206,7 @@ const Register: React.FC = () => {
             {/* Sign In Link */}
             <p className="text-sm text-center text-gray-600 mt-8">
                 Already have an account?{' '}
-                <a href="/auth/login" className="font-medium text-indigo-600 hover:underline">
+                <a href="/customers/login" className="font-medium text-indigo-600 hover:underline">
                     Sign In
                 </a>
             </p>
