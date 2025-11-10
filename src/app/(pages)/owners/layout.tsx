@@ -14,7 +14,6 @@ export default function OwnerLayout({
     name: "Sarah Johnson",
     role: "Owner",
     avatar: "https://i.pinimg.com/736x/ed/6b/a2/ed6ba283b6e0e65cfa751382d4f344fc.jpg", // Ganti dengan path yang benar
-    title: "Owner Portal" // Sesuai desain di Dashboard.png
   };
 
   return (
@@ -30,7 +29,6 @@ export default function OwnerLayout({
           {/* Navbar GLOBAL (dengan props) */}
           <div className="sticky top-0 z-30">
             <Navbar 
-              title={currentUser.title}
               userName={currentUser.name} 
               userRole={currentUser.role}
               userAvatar={currentUser.avatar}
