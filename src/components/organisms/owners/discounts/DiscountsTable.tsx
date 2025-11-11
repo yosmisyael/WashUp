@@ -1,17 +1,18 @@
 // src/components/organisms/owners/discounts/DiscountsTable.tsx
 import React from 'react';
+import Link from 'next/link'; // <-- 1. IMPORT LINK
 
-// 1. IMPORT SEMUA KOMPONEN GLOBAL KITA
+// 2. IMPORT SEMUA KOMPONEN GLOBAL KITA
 import { SearchBar } from '@/components/molecules/SearchBar';
 import { FilterDropdown } from '@/components/molecules/FilterDropdown';
 import Button from '@/components/atoms/Button';
 import { StatusBadge } from '@/components/atoms/StatusBadge';
 import { PaginationControl } from '@/components/molecules/PaginationControl';
 
-// 2. IMPORT IKON
+// 3. IMPORT IKON
 import { Plus, Edit, Trash2 } from 'lucide-react';
 
-// 3. DATA MOCKUP (PALSU) - Sesuai desain
+// 4. DATA MOCKUP (PALSU) - Sesuai desain
 const discountData = [
   {
     name: 'Summer Special',
@@ -35,7 +36,7 @@ const discountData = [
     value: '15%',
     startDate: 'Dec 20, 2024',
     endDate: 'Jan 5, 2025',
-    status: 'scheduled', // <-- Menggunakan variant baru kita
+    status: 'scheduled', // <-- Menggunakan variant 'scheduled' baru kita
   },
 ];
 
@@ -47,7 +48,7 @@ export function DiscountsTable() {
     // 'div' ini adalah wrapper untuk semua kontrol tabel
     <div className="bg-white p-6 shadow rounded-lg text-black">
       
-      {/* 4. Bagian Kontrol (Search, Filter, Button) */}
+      {/* 5. Bagian Kontrol (Search, Filter, Button) */}
       <div className="flex flex-wrap justify-between items-center gap-4 mb-4">
         <div className="flex items-center gap-4">
           <SearchBar placeholder="Search templates..." />
@@ -57,16 +58,20 @@ export function DiscountsTable() {
             defaultValue="All Status"
           />
         </div>
-        <Button
-          className="py-2.5 px-4 text-sm whitespace-nowrap"
-          icon={<Plus className="w-4 h-4" />}
-          // Nanti kita akan tambahkan Link di sini
-        >
-          Create New Discount Template
-        </Button>
+
+        {/* --- PERUBAHAN DI SINI --- */}
+        {/* 6. Tombol sekarang dibungkus dengan <Link> */}
+        <Link href="/owners/discounts/create">
+          <Button
+            className="py-2.5 px-4 text-sm whitespace-nowrap"
+            icon={<Plus className="w-4 h-4" />}
+          >
+            Create New Discount Template
+          </Button>
+        </Link>
       </div>
 
-      {/* 5. Tabel */}
+      {/* 7. Tabel */}
       <table className="w-full table-auto">
         <thead className="text-left text-sm text-gray-500">
           <tr className="border-b border-gray-200">
@@ -105,7 +110,7 @@ export function DiscountsTable() {
         </tbody>
       </table>
 
-      {/* 6. Paginasi */}
+      {/* 8. Paginasi */}
       <div className="mt-6">
         <PaginationControl />
       </div>
