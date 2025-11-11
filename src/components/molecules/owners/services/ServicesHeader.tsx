@@ -2,6 +2,7 @@
 import Button from '@/components/atoms/Button';
 import { SearchBar } from '@/components/molecules/SearchBar'; 
 import { Plus } from 'lucide-react';
+import Link from 'next/link'; // <-- 1. IMPORT KOMPONEN LINK
 
 export function ServicesHeader() {
   return (
@@ -16,21 +17,22 @@ export function ServicesHeader() {
       <div className="flex items-center gap-4 h-11">
         <SearchBar placeholder="Search services..." />
         
-        {/* --- PERBAIKAN DI SINI --- */}
-        {/* 1. Ikon dipindahkan ke prop 'icon'.
-          2. 'children' sekarang HANYA berisi teks.
-        */}
-        <Button
-          className="
-            h-full             
-            px-4               
-            text-sm            
-            whitespace-nowrap  
-          "
-          icon={<Plus className="w-4 h-4" />} // <-- 1. IKON SEKARANG ADA DI PROP 'icon'
+        {/* 2. PERBAIKAN: Bungkus <Button> dengan <Link> */}
+        <Link 
+          href="/owners/services/create" // <-- Tentukan tujuannya
         >
-          Add New Service {/* <-- 2. CHILDREN SEKARANG HANYA TEKS */}
-        </Button>
+          <Button
+            className="
+              h-full             
+              px-4               
+              text-sm            
+              whitespace-nowrap  
+            "
+            icon={<Plus className="w-4 h-4" />}
+          >
+            Add New Service
+          </Button>
+        </Link>
       </div>
     </div>
   );
