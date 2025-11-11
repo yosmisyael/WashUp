@@ -8,6 +8,12 @@ const nextConfig: NextConfig = {
             hostname: "i.pinimg.com",
             pathname: "/**",
         },
+        {
+        protocol: 'https',
+        hostname: 'via.placeholder.com',
+        port: '',
+        pathname: '/**',
+      },
 
       // "www.surrey.ac.uk",
       // "images.squarespace-cdn.com",
