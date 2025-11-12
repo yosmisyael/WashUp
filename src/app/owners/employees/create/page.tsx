@@ -68,6 +68,7 @@ export default function CreateEmployeePage() {
                   Full Name<span className="text-red-600">*</span>
                 </label>
                 <Input
+                id=''
                   type="text"
                   name="fullName"
                   value={formData.fullName}
@@ -103,6 +104,7 @@ export default function CreateEmployeePage() {
                   Start Date<span className="text-red-600">*</span>
                 </label>
                 <Input
+                  id=""
                   type="date"
                   name="startDate"
                   value={formData.startDate}
@@ -127,6 +129,7 @@ export default function CreateEmployeePage() {
                 </label>
                 <div className="relative">
                   <Input
+                    id=""
                     type={showPassword ? "text" : "password"}
                     name="password"
                     value={formData.password}
@@ -156,6 +159,7 @@ export default function CreateEmployeePage() {
                 </label>
                 <div className="relative">
                   <Input
+                    id=""
                     type={showConfirmPassword ? "text" : "password"}
                     name="confirmPassword"
                     value={formData.confirmPassword}
