@@ -15,14 +15,9 @@ import {
   Calendar,
 } from 'lucide-react';
 
-// --- Komponen Halaman Utama ---
-// Halaman ini menerima 'params' dari URL
 export default function ManageOrderPage({ params }: { params: { orderId: string } }) {
-  // Anda bisa menggunakan params.orderId untuk mengambil data dari database
-  // Untuk sekarang, kita akan menampilkannya di judul
   const orderId = params.orderId;
 
-  // Data Contoh (nanti ganti dengan data dari Prisma)
   const orderDetails = {
     customer: {
       name: 'Sarah Johnson',
