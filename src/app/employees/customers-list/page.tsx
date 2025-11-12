@@ -147,7 +147,7 @@ export default function CustomersListPage() {
                             <td className="px-6 py-4 whitespace-nowrap">
                                 {/* Link ini akan mengarah ke halaman detail customer */}
                                 <Link
-                                    href={`/employee/customers-list/${customer.id.replace("#", "")}`}
+                                    href={`/employees/customers-list/${customer.id.replace("#", "")}`}
                                     className="bg-blue-600 text-white px-4 py-2 rounded-lg font-medium text-sm hover:bg-blue-700"
                                 >
                                     View Details

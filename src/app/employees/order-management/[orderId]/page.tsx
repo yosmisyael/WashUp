@@ -57,7 +57,7 @@ export default function ManageOrderPage({ params }: { params: { orderId: string 
         </div>
         <div className="flex items-center gap-3">
           <Link
-            href="/employee/order-management"
+            href="/employees/order-management"
             className="flex items-center gap-2 text-sm font-medium text-gray-600 hover:text-gray-900"
           >
             <ArrowLeft size={16} />
@@ -265,7 +265,7 @@ export default function ManageOrderPage({ params }: { params: { orderId: string 
               <h3 className="text-lg font-semibold text-gray-900">Invoice Management</h3>
             </div>
             <p className="text-xs text-gray-500 mb-2">
-              Invoice will be available when order status is "Done".
+              Invoice will be available when order status is &ldquo;Done&ldquo;.
             </p>
             <p className="text-xs text-gray-500 mb-4">
               Current status: <span className="font-medium text-yellow-600">{orderDetails.status}</span>

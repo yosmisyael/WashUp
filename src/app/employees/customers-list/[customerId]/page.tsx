@@ -24,7 +24,7 @@ export default function CustomerDetailPage({ params }: { params: { customerId: s
       <div className="flex justify-between items-center mb-4">
         <div>
           <Link
-            href="/employee/customers-list"
+            href="/employees/customers-list"
             className="flex items-center gap-2 text-sm font-medium text-gray-600 hover:text-gray-900 mb-2"
           >
             <ArrowLeft size={16} />
