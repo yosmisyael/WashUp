@@ -1,4 +1,3 @@
-// src/app/(pages)/owners/employees/create/page.tsx
 import React from 'react';
 import Link from 'next/link';
 import { ChevronLeft } from 'lucide-react'; 
@@ -6,13 +5,10 @@ import { EmployeeForm } from '@/components/organisms/owners/employees/EmployeeFo
 
 export default function CreateEmployeePage() {
   return (
-    // Kita batasi lebar halaman agar form tidak terlalu lebar
     <div className="mx-auto max-w-4xl">
       
-      {/* 1. Header Halaman (Link "Back" dan Judul) */}
       <div className="flex justify-between items-center mb-6">
         <div>
-          {/* Breadcrumbs (sesuai desain) */}
           <div className="text-sm text-gray-500 mb-1">
             <Link href="/owners/employees" className="hover:underline">Employees</Link>
             <span className="mx-1">&gt;</span>
@@ -29,7 +25,6 @@ export default function CreateEmployeePage() {
         </Link>
       </div>
 
-      {/* 2. Render Organisme Formulir kita */}
       <EmployeeForm />
     </div>
   );

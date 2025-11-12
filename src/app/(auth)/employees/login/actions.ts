@@ -65,7 +65,7 @@ export async function loginEmployee(
         }
 
         await createSession({
-            sub: employee.id,
+            sub: employee.id.toString(),
             name: employee.name,
             email: employee.email,
             role: employee.role,
