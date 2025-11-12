@@ -1,17 +1,13 @@
-// src/app/(pages)/owners/services/create/page.tsx
 import React from 'react';
 import Link from 'next/link';
 import { ChevronLeft } from 'lucide-react'; 
 import { ServiceForm } from '@/components/organisms/owners/services/ServiceForm';
-// 1. IMPORT 'HintCard' DI SINI (di level halaman)
 import HintCard from '@/components/molecules/owners/HintCard';
 
 export default function CreateServicePage() {
   return (
-    // Kita batasi lebar halaman agar form tidak terlalu lebar
     <div className="mx-auto max-w-4xl">
       
-      {/* 1. Header Halaman (Link "Back" dan Judul) */}
       <div className="mb-6">
         <Link 
           href="/owners/services" 
@@ -27,11 +23,8 @@ export default function CreateServicePage() {
         </p>
       </div>
 
-      {/* 2. HAPUS 'div' KARTU PUTIH DARI SINI */}
-      {/* Render Organisme Formulir (yang sekarang sudah menjadi kartu) */}
       <ServiceForm />
 
-      {/* 3. Render 'HintCard' DI LUAR dan DI BAWAH 'ServiceForm' */}
       <div className="mt-10">
         <HintCard title="Service Setup Tips">
           <ul className="list-disc space-y-1 pl-5">

@@ -1,14 +1,11 @@
-// src/components/organisms/owners/services/ServicesTable.tsx
 import React from 'react';
-import { StatusBadge } from '@/components/atoms/StatusBadge';
 import { PaginationControl } from '@/components/molecules/PaginationControl';
-// 1. IMPORT IKON-IKON BARU
-import { 
-  Filter, Upload, Edit, Trash2, 
-  Shirt, Zap, Sparkles, Wind, Package // <-- Ikon untuk layanan
+import {
+    Filter, Upload, Edit, Trash2,
+    Shirt, Zap, Sparkles, Wind, Package, LucideIcon
 } from 'lucide-react';
+import {ITEM_UNIT} from "../../../../../prisma/generated/enums";
 
-// 2. UPDATE MOCK DATA DENGAN INFORMASI IKON
 const servicesData = [
   {
     name: 'Regular Wash & Dry',
@@ -17,8 +14,8 @@ const servicesData = [
     unit: 'Kg',
     completionTime: '2 hours',
     status: 'active',
-    Icon: Shirt, // <-- Tambahkan Ikon
-    iconColor: 'text-blue-600 bg-blue-100', // <-- Tambahkan Warna
+    Icon: Shirt,
+    iconColor: 'text-blue-600 bg-blue-100',
   },
   {
     name: 'Premium Wash & Press',
@@ -62,7 +59,18 @@ const servicesData = [
   },
 ];
 
-export function ServicesTable() {
+export type ServicesTableProps = {
+    id: number;
+    name: string;
+    descriptions: string;
+    price: number;
+    unit: ITEM_UNIT;
+    completionTimeInHours: number;
+    Icon?: LucideIcon;
+    iconColor?: string;
+};
+
+export function ServicesTable({ serviceTableProp }: { serviceTableProp: ServicesTableProps[] }) {
   return (
     <div className="bg-white p-6 shadow rounded-lg text-black">
       <div className="flex justify-between items-center mb-4">
@@ -91,25 +99,22 @@ export function ServicesTable() {
           </tr>
         </thead>
         <tbody className="divide-y divide-gray-200">
-          {servicesData.map((service) => (
+          {serviceTableProp.map((service) => (
             <tr key={service.name} className="hover:bg-gray-50">
               <td className="p-4">
                 <div className="flex items-center">
                   <div className={`p-2 rounded-lg mr-3 ${service.iconColor}`}>
-                    <service.Icon className="w-5 h-5" />
+                      {service.Icon && <service.Icon className="w-5 h-5" />}
                   </div>
                   <div>
                     <div className="font-medium text-black">{service.name}</div>
-                    <div className="text-sm text-gray-500">{service.description}</div>
+                    <div className="text-sm text-gray-500">{service.descriptions}</div>
                   </div>
                 </div>
               </td>
               <td className="p-4">${service.price.toFixed(2)}</td>
               <td className="p-4">{service.unit}</td>
-              <td className="p-4">{service.completionTime}</td>
-              <td className="p-4">
-                <StatusBadge variant={service.status as 'active' | 'inactive'} />
-              </td>
+              <td className="p-4">{service.completionTimeInHours}</td>
               <td className="p-4">
                 <div className="flex gap-2">
                   <button className="text-blue-600 hover:text-blue-800">
