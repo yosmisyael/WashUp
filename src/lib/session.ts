@@ -1,97 +1,76 @@
-import 'server-only';
-import {JwtPayloadCustomer, signToken} from '@/lib/jwt';
+'use server';
+
+import {JwtPayloadSession, signToken} from '@/lib/jwt';
 import {cookies} from 'next/headers';
 import prisma from '@/lib/prisma';
+import {redirect} from "next/navigation";
+import jwt from "jsonwebtoken";
 
-// import { query } from '@/app/lib/db';
-// import { cookies } from 'next/headers';
-// import { redirect } from 'next/navigation';
-//
-// // Session payload type
-// export type SessionPayload = {
-//     customerId: number;
-// };
-//
-//
-// // --- Reads, verifies, and decodes the session cookie ---
-// export async function getSession(): Promise<SessionPayload | null> {
-//     // 1. Get the session token from the cookie
-//     const sessionToken = cookies().get('session_token')?.value;
-//     if (!sessionToken) {
-//         return null;
-//     }
-//
-//     try {
-//         // 2. Look up the token in the database
-//         const { rows } = await query(
-//             'SELECT customer_id FROM customer_sessions WHERE token = $1',
-//             [sessionToken]
-//         );
-//
-//         if (rows.length === 0) {
-//             return null; // Token not found or invalid
-//         }
-//
-//         const customerId = rows[0].customer_id;
-//         return { customerId };
-//     } catch (error) {
-//         console.error('Failed to get session:', error);
-//         return null;
-//     }
-// }
-//
-// // --- Destroys the session cookie ---
-// export async function deleteSession() {
-//     // 1. Get the session token from the cookie
-//     const sessionToken = cookies().get('session_token')?.value;
-//     if (!sessionToken) {
-//         return redirect('/login'); // No session, just redirect
-//     }
-//
-//     try {
-//         // 2. Delete the session from the database
-//         await query('DELETE FROM customer_sessions WHERE token = $1', [
-//             sessionToken,
-//         ]);
-//     } catch (error) {
-//         console.error('Failed to delete session:', error);
-//         // Continue to log out the user even if DB delete fails
-//     }
-//
-//     // 3. Delete the cookie
-//     cookies().delete('session_token');
-//
-//     redirect('/login');
-// }
-//
-// export async function verifySession() {
-//     const session = await getSession();
-//     if (!session) {
-//         redirect('/login');
-//     }
-//     return session;
-// }
-//
-
-export async function createSession(jwtPayload: JwtPayloadCustomer) {
+export async function createSession(jwtPayload: JwtPayloadSession) {
     const token = signToken(jwtPayload);
-    
-    await prisma.customerSession.create({
-        data: {
-            token,
-            customerId: jwtPayload.sub,
-        }
-    })
+
+    if (jwtPayload.role) {
+        await prisma.employeeSession.upsert({
+            where: {
+                employeeId: parseInt(jwtPayload.sub!),
+            },
+            update: {
+                token
+            },
+            create: {
+                token,
+                employeeId: parseInt(jwtPayload.sub!),
+            }
+        })
+    } else {
+        await prisma.customerSession.create({
+            data: {
+                token,
+                customerId: parseInt(jwtPayload.sub!),
+            }
+        })
+    }
 
     const cookie = await cookies();
 
-    const exp = Bun.env.JWT_AGE!;
+    const expiresAt = new Date(Date.now() + parseInt(Bun.env.JWT_AGE!) * 1000);
 
     cookie.set('session', token, {
         httpOnly: true,
         secure: Bun.env.APP_ENV === 'production',
-        expires: parseInt(exp),
+        expires: expiresAt,
         sameSite: 'lax',
         path: '/',
     });
+}
+
+export async function deleteSession() {
+    const cookie = await cookies();
+    const token = cookie.get('session')?.value;
+    if (!token) {
+        return redirect('/employees/login');
+    }
+
+    try {
+        const verified = jwt.verify(token, Bun.env.JWT_SECRET_KEY!) as JwtPayloadSession;
+        if (verified.role == 'owner' || verified.role == 'employee') {
+            await prisma.employeeSession.delete({
+                where: {
+                    employeeId: parseInt(verified.sub!),
+                }
+            });
+        } else {
+            await prisma.customerSession.delete({
+                where: {
+                    customerId: parseInt(verified.sub!),
+                }
+            });
+        }
+
+    } catch (error) {
+        console.error('Failed to delete session:', error);
+    }
+
+    cookie.delete('session');
+    redirect('/employees/login');
 }

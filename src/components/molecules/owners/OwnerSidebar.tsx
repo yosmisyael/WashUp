@@ -4,7 +4,8 @@
 import Link from 'next/link';
 import Logo from '@/components/atoms/Logo';
 import { LayoutDashboard, Users, ShoppingBag, Tag, LogOut } from 'lucide-react';
-import { usePathname } from 'next/navigation'; 
+import { usePathname } from 'next/navigation';
+import {deleteSession} from "@/lib/session";
 
 const navItems = [
   { name: 'Dashboard', href: '/owners/dashboard', icon: LayoutDashboard },
@@ -13,6 +14,10 @@ const navItems = [
   { name: 'Discounts', href: '/owners/discounts', icon: Tag },
   { name: 'Customers', href: '/owners/customers', icon: Users },
 ];
+
+export type ownerSidebarProp = {
+    logoutAction: () => void;
+}
 
 export function OwnerSidebar() {
   const pathname = usePathname(); 
@@ -64,10 +69,9 @@ export function OwnerSidebar() {
         })}
       </nav>
 
-      {/* Bagian Sign Out (Tetap sama) */}
       <div className="px-4 py-6 border-t border-gray-200">
-        <button className="flex items-center w-full px-4 py-2.5 rounded-lg text-gray-600 hover:bg-gray-100 transition-colors">
-          <LogOut className="w-5 h-5 mr-3 text-gray-500" /> 
+        <button onClick={deleteSession} className="flex items-center w-full px-4 py-2.5 rounded-lg text-gray-600 hover:bg-gray-100 transition-colors">
+          <LogOut className="w-5 h-5 mr-3 text-gray-500" />
           <span>Sign Out</span>
         </button>
       </div>

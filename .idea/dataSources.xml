@@ -8,5 +8,12 @@
       <jdbc-url>jdbc:postgresql://localhost:5432/course_washup</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
+    <data-source source="LOCAL" name="course_washup_dev@localhost" uuid="fd0399cc-3f6b-4f07-93c2-5d4002a53beb">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://localhost:5432/course_washup_dev</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
   </component>
 </project>

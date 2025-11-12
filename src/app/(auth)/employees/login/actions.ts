@@ -21,11 +21,13 @@ export async function clearFlashMessages() {
     }
 }
 
-export async function loginCustomer(
+export async function loginEmployee(
     prevState: LoginFormState,
     formData: FormData,
 ) {
     const data = Object.fromEntries(formData);
+
+    let employee;
 
     const validatedFields = LoginSchema.safeParse(data);
 
@@ -38,23 +40,24 @@ export async function loginCustomer(
     const { email, password } = validatedFields.data;
 
     try {
-        const userQuery = await prisma.customer.findUniqueOrThrow({
+        employee = await prisma.employee.findUniqueOrThrow({
             where: { email },
             select: {
                 id: true,
                 name: true,
                 email: true,
                 password: true,
+                role: true,
             }
         });
 
-        if (!userQuery) {
+        if (!employee) {
             return { message: 'Invalid email or password.' };
         }
 
         const isPasswordValid: boolean = await Bun.password.verify(
             password,
-            userQuery.password
+            employee.password
         );
 
         if (!isPasswordValid) {
@@ -62,14 +65,19 @@ export async function loginCustomer(
         }
 
         await createSession({
-            sub: userQuery.id,
-            name: userQuery.name,
-            email: userQuery.email,
+            sub: employee.id,
+            name: employee.name,
+            email: employee.email,
+            role: employee.role,
         });
     } catch (e: unknown) {
         console.error(e);
         return { message: 'Login failed, please try again later.' };
     }
 
-    redirect('/customers/dashboard');
+    if (employee && employee.role == "owner") {
+        redirect('/owners/dashboard');
+    } else {
+        redirect('/employees/dashboard');
+    }
 }
