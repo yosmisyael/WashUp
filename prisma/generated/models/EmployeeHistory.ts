@@ -365,6 +365,10 @@ export type EmployeeHistoryUncheckedUpdateManyWithoutEmployeeNestedInput = {
   deleteMany?: Prisma.EmployeeHistoryScalarWhereInput | Prisma.EmployeeHistoryScalarWhereInput[]
 }
 
+export type NullableDateTimeFieldUpdateOperationsInput = {
+  set?: Date | string | null
+}
+
 export type EmployeeHistoryCreateWithoutEmployeeInput = {
   joinDate: Date | string
   resignDate?: Date | string | null

@@ -191,7 +191,7 @@ export type EmployeeGroupByOutputType = {
   email: string
   password: string
   role: $Enums.ROLE
-  startDate: Date | null
+  startDate: Date
   _count: EmployeeCountAggregateOutputType | null
   _avg: EmployeeAvgAggregateOutputType | null
   _sum: EmployeeSumAggregateOutputType | null
@@ -223,7 +223,7 @@ export type EmployeeWhereInput = {
   email?: Prisma.StringFilter<"Employee"> | string
   password?: Prisma.StringFilter<"Employee"> | string
   role?: Prisma.EnumROLEFilter<"Employee"> | $Enums.ROLE
-  startDate?: Prisma.DateTimeNullableFilter<"Employee"> | Date | string | null
+  startDate?: Prisma.DateTimeFilter<"Employee"> | Date | string
   history?: Prisma.EmployeeHistoryListRelationFilter
   invoices?: Prisma.InvoiceListRelationFilter
   employeeSession?: Prisma.XOR<Prisma.EmployeeSessionNullableScalarRelationFilter, Prisma.EmployeeSessionWhereInput> | null
@@ -235,7 +235,7 @@ export type EmployeeOrderByWithRelationInput = {
   email?: Prisma.SortOrder
   password?: Prisma.SortOrder
   role?: Prisma.SortOrder
-  startDate?: Prisma.SortOrderInput | Prisma.SortOrder
+  startDate?: Prisma.SortOrder
   history?: Prisma.EmployeeHistoryOrderByRelationAggregateInput
   invoices?: Prisma.InvoiceOrderByRelationAggregateInput
   employeeSession?: Prisma.EmployeeSessionOrderByWithRelationInput
@@ -250,7 +250,7 @@ export type EmployeeWhereUniqueInput = Prisma.AtLeast<{
   name?: Prisma.StringFilter<"Employee"> | string
   password?: Prisma.StringFilter<"Employee"> | string
   role?: Prisma.EnumROLEFilter<"Employee"> | $Enums.ROLE
-  startDate?: Prisma.DateTimeNullableFilter<"Employee"> | Date | string | null
+  startDate?: Prisma.DateTimeFilter<"Employee"> | Date | string
   history?: Prisma.EmployeeHistoryListRelationFilter
   invoices?: Prisma.InvoiceListRelationFilter
   employeeSession?: Prisma.XOR<Prisma.EmployeeSessionNullableScalarRelationFilter, Prisma.EmployeeSessionWhereInput> | null
@@ -262,7 +262,7 @@ export type EmployeeOrderByWithAggregationInput = {
   email?: Prisma.SortOrder
   password?: Prisma.SortOrder
   role?: Prisma.SortOrder
-  startDate?: Prisma.SortOrderInput | Prisma.SortOrder
+  startDate?: Prisma.SortOrder
   _count?: Prisma.EmployeeCountOrderByAggregateInput
   _avg?: Prisma.EmployeeAvgOrderByAggregateInput
   _max?: Prisma.EmployeeMaxOrderByAggregateInput
@@ -279,7 +279,7 @@ export type EmployeeScalarWhereWithAggregatesInput = {
   email?: Prisma.StringWithAggregatesFilter<"Employee"> | string
   password?: Prisma.StringWithAggregatesFilter<"Employee"> | string
   role?: Prisma.EnumROLEWithAggregatesFilter<"Employee"> | $Enums.ROLE
-  startDate?: Prisma.DateTimeNullableWithAggregatesFilter<"Employee"> | Date | string | null
+  startDate?: Prisma.DateTimeWithAggregatesFilter<"Employee"> | Date | string
 }
 
 export type EmployeeCreateInput = {
@@ -287,7 +287,7 @@ export type EmployeeCreateInput = {
   email: string
   password: string
   role?: $Enums.ROLE
-  startDate?: Date | string | null
+  startDate?: Date | string
   history?: Prisma.EmployeeHistoryCreateNestedManyWithoutEmployeeInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutEmployeeInput
   employeeSession?: Prisma.EmployeeSessionCreateNestedOneWithoutEmployeeInput
@@ -299,7 +299,7 @@ export type EmployeeUncheckedCreateInput = {
   email: string
   password: string
   role?: $Enums.ROLE
-  startDate?: Date | string | null
+  startDate?: Date | string
   history?: Prisma.EmployeeHistoryUncheckedCreateNestedManyWithoutEmployeeInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutEmployeeInput
   employeeSession?: Prisma.EmployeeSessionUncheckedCreateNestedOneWithoutEmployeeInput
@@ -310,7 +310,7 @@ export type EmployeeUpdateInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumROLEFieldUpdateOperationsInput | $Enums.ROLE
-  startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   history?: Prisma.EmployeeHistoryUpdateManyWithoutEmployeeNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutEmployeeNestedInput
   employeeSession?: Prisma.EmployeeSessionUpdateOneWithoutEmployeeNestedInput
@@ -322,7 +322,7 @@ export type EmployeeUncheckedUpdateInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumROLEFieldUpdateOperationsInput | $Enums.ROLE
-  startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   history?: Prisma.EmployeeHistoryUncheckedUpdateManyWithoutEmployeeNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutEmployeeNestedInput
   employeeSession?: Prisma.EmployeeSessionUncheckedUpdateOneWithoutEmployeeNestedInput
@@ -334,7 +334,7 @@ export type EmployeeCreateManyInput = {
   email: string
   password: string
   role?: $Enums.ROLE
-  startDate?: Date | string | null
+  startDate?: Date | string
 }
 
 export type EmployeeUpdateManyMutationInput = {
@@ -342,7 +342,7 @@ export type EmployeeUpdateManyMutationInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumROLEFieldUpdateOperationsInput | $Enums.ROLE
-  startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type EmployeeUncheckedUpdateManyInput = {
@@ -351,7 +351,7 @@ export type EmployeeUncheckedUpdateManyInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumROLEFieldUpdateOperationsInput | $Enums.ROLE
-  startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type EmployeeCountOrderByAggregateInput = {
@@ -396,10 +396,6 @@ export type EmployeeScalarRelationFilter = {
 
 export type EnumROLEFieldUpdateOperationsInput = {
   set?: $Enums.ROLE
-}
-
-export type NullableDateTimeFieldUpdateOperationsInput = {
-  set?: Date | string | null
 }
 
 export type EmployeeCreateNestedOneWithoutHistoryInput = {
@@ -449,7 +445,7 @@ export type EmployeeCreateWithoutHistoryInput = {
   email: string
   password: string
   role?: $Enums.ROLE
-  startDate?: Date | string | null
+  startDate?: Date | string
   invoices?: Prisma.InvoiceCreateNestedManyWithoutEmployeeInput
   employeeSession?: Prisma.EmployeeSessionCreateNestedOneWithoutEmployeeInput
 }
@@ -460,7 +456,7 @@ export type EmployeeUncheckedCreateWithoutHistoryInput = {
   email: string
   password: string
   role?: $Enums.ROLE
-  startDate?: Date | string | null
+  startDate?: Date | string
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutEmployeeInput
   employeeSession?: Prisma.EmployeeSessionUncheckedCreateNestedOneWithoutEmployeeInput
 }
@@ -486,7 +482,7 @@ export type EmployeeUpdateWithoutHistoryInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumROLEFieldUpdateOperationsInput | $Enums.ROLE
-  startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   invoices?: Prisma.InvoiceUpdateManyWithoutEmployeeNestedInput
   employeeSession?: Prisma.EmployeeSessionUpdateOneWithoutEmployeeNestedInput
 }
@@ -497,7 +493,7 @@ export type EmployeeUncheckedUpdateWithoutHistoryInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumROLEFieldUpdateOperationsInput | $Enums.ROLE
-  startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutEmployeeNestedInput
   employeeSession?: Prisma.EmployeeSessionUncheckedUpdateOneWithoutEmployeeNestedInput
 }
@@ -507,7 +503,7 @@ export type EmployeeCreateWithoutEmployeeSessionInput = {
   email: string
   password: string
   role?: $Enums.ROLE
-  startDate?: Date | string | null
+  startDate?: Date | string
   history?: Prisma.EmployeeHistoryCreateNestedManyWithoutEmployeeInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutEmployeeInput
 }
@@ -518,7 +514,7 @@ export type EmployeeUncheckedCreateWithoutEmployeeSessionInput = {
   email: string
   password: string
   role?: $Enums.ROLE
-  startDate?: Date | string | null
+  startDate?: Date | string
   history?: Prisma.EmployeeHistoryUncheckedCreateNestedManyWithoutEmployeeInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutEmployeeInput
 }
@@ -544,7 +540,7 @@ export type EmployeeUpdateWithoutEmployeeSessionInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumROLEFieldUpdateOperationsInput | $Enums.ROLE
-  startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   history?: Prisma.EmployeeHistoryUpdateManyWithoutEmployeeNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutEmployeeNestedInput
 }
@@ -555,7 +551,7 @@ export type EmployeeUncheckedUpdateWithoutEmployeeSessionInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumROLEFieldUpdateOperationsInput | $Enums.ROLE
-  startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   history?: Prisma.EmployeeHistoryUncheckedUpdateManyWithoutEmployeeNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutEmployeeNestedInput
 }
@@ -565,7 +561,7 @@ export type EmployeeCreateWithoutInvoicesInput = {
   email: string
   password: string
   role?: $Enums.ROLE
-  startDate?: Date | string | null
+  startDate?: Date | string
   history?: Prisma.EmployeeHistoryCreateNestedManyWithoutEmployeeInput
   employeeSession?: Prisma.EmployeeSessionCreateNestedOneWithoutEmployeeInput
 }
@@ -576,7 +572,7 @@ export type EmployeeUncheckedCreateWithoutInvoicesInput = {
   email: string
   password: string
   role?: $Enums.ROLE
-  startDate?: Date | string | null
+  startDate?: Date | string
   history?: Prisma.EmployeeHistoryUncheckedCreateNestedManyWithoutEmployeeInput
   employeeSession?: Prisma.EmployeeSessionUncheckedCreateNestedOneWithoutEmployeeInput
 }
@@ -602,7 +598,7 @@ export type EmployeeUpdateWithoutInvoicesInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumROLEFieldUpdateOperationsInput | $Enums.ROLE
-  startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   history?: Prisma.EmployeeHistoryUpdateManyWithoutEmployeeNestedInput
   employeeSession?: Prisma.EmployeeSessionUpdateOneWithoutEmployeeNestedInput
 }
@@ -613,7 +609,7 @@ export type EmployeeUncheckedUpdateWithoutInvoicesInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumROLEFieldUpdateOperationsInput | $Enums.ROLE
-  startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   history?: Prisma.EmployeeHistoryUncheckedUpdateManyWithoutEmployeeNestedInput
   employeeSession?: Prisma.EmployeeSessionUncheckedUpdateOneWithoutEmployeeNestedInput
 }
@@ -721,7 +717,7 @@ export type $EmployeePayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     email: string
     password: string
     role: $Enums.ROLE
-    startDate: Date | null
+    startDate: Date
   }, ExtArgs["result"]["employee"]>
   composites: {}
 }
