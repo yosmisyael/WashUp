@@ -1,21 +1,50 @@
-import type { NextConfig } from "next";
+// next.config.ts
+import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
   images: {
     remotePatterns: [
-        {
-            protocol: "https",
-            hostname: "i.pinimg.com",
-            pathname: "/**",
-        },
-
-      // "www.surrey.ac.uk",
-      // "images.squarespace-cdn.com",
-      // "awsimages.detik.net.id",
-      // "drive.google.com",
-      // "docs.google.com",
+      // Domain dari konfigurasi pertama Anda
+      {
+        protocol: 'https',
+        hostname: 'i.pinimg.com',
+        pathname: '/**',
+      },
+      // Domain dari konfigurasi kedua Anda
+      {
+        protocol: 'https',
+        hostname: 'placehold.co',
+        pathname: '/**',
+      },
+      // Domain yang Anda komentari (saya ubah menjadi format yang benar)
+      {
+        protocol: 'https',
+        hostname: 'www.surrey.ac.uk',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'images.squarespace-cdn.com',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'awsimages.detik.net.id',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'drive.google.com',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'docs.google.com',
+        pathname: '/**',
+      },
     ],
   },
 };
 
+// Gunakan 'export default' untuk file .ts
 export default nextConfig;

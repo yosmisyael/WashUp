@@ -1,48 +1,56 @@
-import React, {ButtonHTMLAttributes, ReactNode} from 'react';
+// src/components/atoms/Button.tsx
+import React, { ButtonHTMLAttributes, ReactNode } from 'react';
 
 type ButtonProps = {
-    variant?: 'primary' | 'secondary';
-    icon?: ReactNode;
-    className?: string;
-    children: ReactNode;
+  variant?: 'primary' | 'secondary' | 'outline' | 'ghost';
+  size?: 'sm' | 'md' | 'lg';
+  icon?: ReactNode;
+  className?: string;
+  children: ReactNode;
 } & ButtonHTMLAttributes<HTMLButtonElement>;
 
-const Button: React.FC<ButtonProps> = ({
-                                          children,
-                                          variant = 'primary',
-                                          icon,
-                                          className = '',
-                                          ...props
-                                        }: ButtonProps) => {
-    
-    // --- PERUBAHAN DI SINI ---
-    // Menambahkan 'border border-transparent'
-    // Ini menambahkan tinggi 2px (1px atas/bawah) yang tak terlihat
-    // agar tingginya sama dengan input yang memiliki border (seperti SearchBar)
-    const baseStyles: string =
-      'inline-flex items-center justify-center gap-2 rounded-lg px-6 py-2.5 font-semibold text-sm shadow-sm transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed hover:cursor-pointer border border-transparent';
+// --- PERUBAHAN 1: Tambahkan 'export' di sini ---
+export const Button: React.FC<ButtonProps> = ({
+  children,
+  variant = 'primary',
+  size = 'md',
+  icon,
+  className = '',
+  ...props
+}: ButtonProps) => {
 
-    const variantStyles: Record<'primary' | 'secondary', string> = {
-      primary:
-        'bg-primary text-white hover:bg-indigo-700 focus:ring-indigo-500',
-      secondary:
-        // 'border-cyan-600' di sini akan menimpa 'border-transparent'
-        'bg-white text-cyan-700 border border-cyan-600 hover:bg-cyan-50 focus:ring-cyan-500',
-    };
+  const baseStyles: string =
+    'inline-flex items-center justify-center gap-2 rounded-lg font-semibold shadow-sm transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed hover:cursor-pointer border border-transparent';
 
-    // 'className' (seperti "py-2.5 px-4") akan ditambahkan di akhir
-    // dan menimpa 'baseStyles' (seperti 'px-6 py-2.5') jika diperlukan
-    const combinedStyles = `${baseStyles} ${variantStyles[variant]} ${className}`;
+  const sizeStyles: Record<'sm' | 'md' | 'lg', string> = {
+    sm: 'px-3 py-1.5 text-xs',
+    md: 'px-4 py-2 text-sm',
+    lg: 'px-6 py-2.5 text-sm',
+  };
 
-    return (
-      <button className={combinedStyles} {...props}>
-        {/* Render the icon if it's provided */}
-        {icon && <span className="inline-block">{icon}</span>}
+  const variantStyles: Record<
+    'primary' | 'secondary' | 'outline' | 'ghost',
+    string
+  > = {
+    primary:
+      'bg-primary text-white hover:bg-indigo-700 focus:ring-indigo-500',
+    secondary:
+      'bg-white text-cyan-700 border border-cyan-600 hover:bg-cyan-50 focus:ring-cyan-500',
+    outline:
+      'bg-white text-gray-700 border border-gray-300 hover:bg-gray-50 focus:ring-gray-500',
+    ghost:
+      'bg-transparent text-gray-700 hover:bg-gray-100 focus:ring-gray-500',
+  };
 
-        {/* Button text */}
-        <span>{children}</span>
-      </button>
-    );
+  const combinedStyles = `${baseStyles} ${variantStyles[variant]} ${sizeStyles[size]} ${className}`;
+
+  return (
+    <button className={combinedStyles} {...props}>
+      {icon && <span className="inline-block">{icon}</span>}
+      <span>{children}</span>
+    </button>
+  );
 };
 
-export default Button;
+// --- PERUBAHAN 2: Hapus baris 'export default Button;' dari sini ---
+// (Tidak ada apa-apa di akhir file)

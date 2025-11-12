@@ -3,7 +3,7 @@
 import {useState} from "react";
 import {useRouter} from "next/navigation";
 import {Menu, X} from "lucide-react";
-import Button from "@/components/atoms/Button";
+import { Button } from "@/components/atoms/Button";
 import Logo from "@/components/atoms/Logo";
 import Link from "next/link";
 

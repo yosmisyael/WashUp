@@ -1,57 +1,47 @@
-import React, {ReactNode, useState} from "react";
-import {Eye, EyeOff} from "lucide-react";
+// src/components/atoms/Input.tsx
+'use client';
+import React from 'react';
+import { LucideIcon } from 'lucide-react';
 
-type InputProps = {
-    icon: ReactNode;
-    id: string;
-} & React.InputHTMLAttributes<HTMLInputElement>;
+interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+  label?: string; // Label dibuat opsional untuk filter pencarian
+  id: string;
+  helperText?: string;
+  icon?: LucideIcon;
+  onIconClick?: () => void;
+}
 
-export const InputWithIcon: React.FC<InputProps> = ({
-                                                 icon,
-                                                 id,
-                                                 className = '',
-                                                 ...props
-                                             }) => {
+// Pastikan Anda menggunakan 'export const Input'
+export const Input = React.forwardRef<HTMLInputElement, InputProps>(
+  ({ label, id, type = 'text', helperText, icon: Icon, onIconClick, ...props }, ref) => {
     return (
+      <div className="w-full">
+        {label && ( // Hanya tampilkan label jika ada
+          <label htmlFor={id} className="mb-2 block text-sm font-medium text-gray-700">
+            {label} {props.required && <span className="text-red-500">*</span>}
+          </label>
+        )}
         <div className="relative">
-      <span className="absolute inset-y-0 left-0 flex items-center pl-3">
-        {icon}
-      </span>
-            <input
-                id={id}
-                className={`w-full rounded-lg border border-gray-200 bg-gray-100 p-3 pl-10 text-sm text-gray-700 outline-none focus:border-indigo-500 focus:bg-white focus:ring-1 focus:ring-indigo-500 ${className}`}
-                {...props}
-            />
+          <input
+            type={type}
+            id={id}
+            name={id}
+            ref={ref}
+            // Menambahkan 'pl-10' jika ada ikon, agar ikon tidak menimpa teks
+            className={`block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm ${Icon ? 'pl-10 pr-4' : 'px-4 py-2'}`}
+            {...props}
+          />
+          {Icon && (
+            // Mengubah posisi ikon ke kiri (sesuai gambar Search)
+            <div className="absolute inset-y-0 left-0 flex cursor-pointer items-center pl-3" onClick={onIconClick}>
+              <Icon className="h-5 w-5 text-gray-400" />
+            </div>
+          )}
         </div>
+        {helperText && <p className="mt-2 text-xs text-gray-500">{helperText}</p>}
+      </div>
     );
-};
+  }
+);
 
-export const PasswordInput: React.FC<InputProps> = ({
-                                                 icon,
-                                                 id,
-                                                 className = '',
-                                                 ...props
-                                             }) => {
-    const [showPassword, setShowPassword] = useState(false);
-
-    return (
-        <div className="relative">
-      <span className="absolute inset-y-0 left-0 flex items-center pl-3">
-        {icon}
-      </span>
-            <input
-                id={id}
-                type={showPassword ? 'text' : 'password'}
-                className={`w-full rounded-lg border border-gray-200 bg-gray-100 p-3 pl-10 pr-10 text-sm text-gray-700 outline-none focus:border-indigo-500 focus:bg-white focus:ring-1 focus:ring-indigo-500 ${className}`}
-                {...props}
-            />
-            <button
-                type="button" // Prevent form submission
-                onClick={() => setShowPassword(!showPassword)}
-                className="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-400 hover:text-gray-600"
-            >
-                {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
-            </button>
-        </div>
-    );
-};
+Input.displayName = 'Input';

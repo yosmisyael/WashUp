@@ -1,5 +1,5 @@
 // src/components/organisms/owners/services/ServicesHeader.tsx
-import Button from '@/components/atoms/Button';
+import { Button } from "@/components/atoms/Button";
 import { SearchBar } from '@/components/molecules/SearchBar'; 
 import { Plus } from 'lucide-react';
 

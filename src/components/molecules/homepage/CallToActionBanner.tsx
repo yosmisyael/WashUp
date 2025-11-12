@@ -1,5 +1,5 @@
 import React from "react";
-import Button from "@/components/atoms/Button";
+import { Button } from "@/components/atoms/Button";
 import {Apple, Smartphone} from "lucide-react";
 
 const CallToActionBanner: React.FC = () => {

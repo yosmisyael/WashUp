@@ -1,6 +1,6 @@
 "use client";
 
-import Button from "@/components/atoms/Button";
+import { Button } from "@/components/atoms/Button";
 import {CheckCircle, Rocket, WashingMachine} from "lucide-react";
 import {router} from "next/client";
 
