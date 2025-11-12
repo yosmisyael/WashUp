@@ -74,3 +74,22 @@ export async function deleteSession() {
     cookie.delete('session');
     redirect('/employees/login');
 }
+
+function verifySession(session: string): JwtPayloadSession {
+    return jwt.verify(session, Bun.env.JWT_SECRET_KEY!) as JwtPayloadSession;
+}
+
+export async function getCurrentSession() {
+    try {
+        const cookie = await cookies();
+        const token = cookie.get('session')?.value;
+
+        if (!token) {
+            return null;
+        }
+        return verifySession(token);
+    } catch (error) {
+        console.error('Failed to verify session:', error);
+        return null;
+    }
+}
