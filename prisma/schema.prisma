@@ -54,28 +54,28 @@ enum PAYMENT_METHOD {
 // ----------------------------------------------
 
 model Customer {
-  id                 Int                @id @default(autoincrement())
-  name               String             @db.VarChar(255)
-  email              String             @unique @db.VarChar(255)
-  phone              String?            @db.VarChar(50)
-  password           String             @db.VarChar(255)
-  createdAt          DateTime           @default(now()) @map("created_at") @db.Timestamp(6)
-  locations          Location[]
-  orders             Order[]
-  customerDiscounts  CustomerDiscount[] @relation("CustomerToCustomerDiscount")
-  session            CustomerSession?
+  id                Int                @id @default(autoincrement())
+  name              String             @db.VarChar(255)
+  email             String             @unique @db.VarChar(255)
+  phone             String?            @db.VarChar(50)
+  password          String             @db.VarChar(255)
+  createdAt         DateTime           @default(now()) @map("created_at") @db.Timestamp(6)
+  locations         Location[]
+  orders            Order[]
+  customerDiscounts CustomerDiscount[] @relation("CustomerToCustomerDiscount")
+  session           CustomerSession?
 
   @@map("customers")
 }
 
 model Location {
-  id             Int           @id @default(autoincrement())
-  customerId     Int           @map("customer_id")
-  address        String?       @db.Text
-  information    String?       @db.Text
-  customer       Customer      @relation(fields: [customerId], references: [id], onDelete: Cascade, onUpdate: Cascade)
-  pickupOrders   OrderDetail[] @relation("PickupLocation")
-  deliverOrders  OrderDetail[] @relation("DeliverLocation")
+  id            Int           @id @default(autoincrement())
+  customerId    Int           @map("customer_id")
+  address       String?       @db.Text
+  information   String?       @db.Text
+  customer      Customer      @relation(fields: [customerId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  pickupOrders  OrderDetail[] @relation("PickupLocation")
+  deliverOrders OrderDetail[] @relation("DeliverLocation")
 
   @@map("locations")
 }
@@ -83,6 +83,8 @@ model Location {
 model Employee {
   id              Int               @id @default(autoincrement())
   name            String            @db.VarChar(255)
+  email           String            @unique
+  password        String
   role            ROLE              @default(employee)
   startDate       DateTime?         @default(now()) @map("start_date") @db.Timestamp(6)
   history         EmployeeHistory[]
@@ -93,23 +95,23 @@ model Employee {
 }
 
 model EmployeeHistory {
-  employeeId Int      @map("employee_id")
-  joinDate   DateTime @map("join_date") @db.Timestamp(6)
+  employeeId Int       @map("employee_id")
+  joinDate   DateTime  @map("join_date") @db.Timestamp(6)
   resignDate DateTime? @default(now()) @map("resign_date") @db.Timestamp(6)
-  employee   Employee @relation(fields: [employeeId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  employee   Employee  @relation(fields: [employeeId], references: [id], onDelete: Cascade, onUpdate: Cascade)
 
   @@id([employeeId, joinDate])
   @@map("employee_history")
 }
 
 model Service {
-  id                      Int     @id @default(autoincrement())
-  name                    String  @unique @db.VarChar(255)
-  completionTimeInHours   Int     @map("completion_time_in_hours")
-  price                   Int
-  unit                    ITEM_UNIT
-  descriptions            String  @db.Text
-  items                   Item[]
+  id                    Int       @id @default(autoincrement())
+  name                  String    @unique @db.VarChar(255)
+  completionTimeInHours Int       @map("completion_time_in_hours")
+  price                 Int
+  unit                  ITEM_UNIT
+  descriptions          String    @db.Text
+  items                 Item[]
 
   @@map("services")
 }
@@ -186,14 +188,14 @@ model Discount {
 }
 
 model CustomerDiscount {
-  id                Int               @id @default(autoincrement())
-  customerId        Int               @map("customer_id")
-  discountId        Int               @map("discount_id")
-  limitUsage        Int               @map("limit_usage")
-  timeUsed          Int               @default(0) @map("time_used")
-  customer          Customer          @relation("CustomerToCustomerDiscount", fields: [customerId], references: [id], onDelete: Cascade, onUpdate: Cascade)
-  discount          Discount          @relation("DiscountToCustomerDiscount", fields: [discountId], references: [id], onDelete: Cascade, onUpdate: Cascade)
-  appliedDiscounts  AppliedDiscount[]
+  id               Int               @id @default(autoincrement())
+  customerId       Int               @map("customer_id")
+  discountId       Int               @map("discount_id")
+  limitUsage       Int               @map("limit_usage")
+  timeUsed         Int               @default(0) @map("time_used")
+  customer         Customer          @relation("CustomerToCustomerDiscount", fields: [customerId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  discount         Discount          @relation("DiscountToCustomerDiscount", fields: [discountId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  appliedDiscounts AppliedDiscount[]
 
   @@unique([customerId, discountId], map: "constraint_unique_customer_discount")
   @@map("customer_discounts")
@@ -218,17 +220,17 @@ model EmployeeSession {
 }
 
 model Invoice {
-  id              Int               @id @default(autoincrement())
-  orderId         Int               @unique @map("order_id")
-  employeeId      Int               @map("employee_id")
-  entryDate       DateTime          @map("entry_date") @db.Timestamp(6)
-  completionDate  DateTime          @map("completion_date") @db.Timestamp(6)
-  grandTotal      Int               @map("grand_total")
-  payment         PAYMENT_METHOD?
-  isPaid          Boolean?          @map("is_paid")
-  paidAt          DateTime?         @map("paid_at") @db.Timestamp(6)
-  employee        Employee          @relation(fields: [employeeId], references: [id], onDelete: Cascade, onUpdate: Cascade)
-  order           Order             @relation(fields: [orderId], references: [id])
+  id               Int               @id @default(autoincrement())
+  orderId          Int               @unique @map("order_id")
+  employeeId       Int               @map("employee_id")
+  entryDate        DateTime          @map("entry_date") @db.Timestamp(6)
+  completionDate   DateTime          @map("completion_date") @db.Timestamp(6)
+  grandTotal       Int               @map("grand_total")
+  payment          PAYMENT_METHOD?
+  isPaid           Boolean?          @map("is_paid")
+  paidAt           DateTime?         @map("paid_at") @db.Timestamp(6)
+  employee         Employee          @relation(fields: [employeeId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  order            Order             @relation(fields: [orderId], references: [id])
   appliedDiscounts AppliedDiscount[]
 
   @@map("invoices")

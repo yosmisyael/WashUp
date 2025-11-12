@@ -1,9 +1,6 @@
 "use client";
 
-import React, {
-    useActionState,
-    useState,
-} from 'react';
+import React, { useActionState } from 'react';
 import {
     User,
     Mail,
@@ -23,16 +20,10 @@ const initialState: RegisterFormState = {
 };
 
 const Register: React.FC = () => {
-    const [fullName, setFullName] = useState('');
-    const [email, setEmail] = useState('');
-    const [phone, setPhone] = useState('');
-    const [password, setPassword] = useState('');
-    const [agreed, setAgreed] = useState(false);
-
     const [state, formAction, pending] = useActionState(customerRegister, initialState);
 
     return (
-        <div className="mx-auto bg-white p-8 sm:p-10 rounded-xl shadow-lg w-full max-w-md">
+        <div className="mx-auto bg-white p-8 sm:p-10 rounded-xl shadow-lg w-full max-w-xl my-10">
             {/* Header */}
             <div className="flex flex-col items-center">
                 <Logo size={4}/>
@@ -58,8 +49,6 @@ const Register: React.FC = () => {
                         type="text"
                         placeholder="Enter your full name"
                         icon={<User size={18} className="text-gray-400"/>}
-                        value={fullName}
-                        onChange={(e) => setFullName(e.target.value)}
                         required
                     />
                 </div>
@@ -78,8 +67,6 @@ const Register: React.FC = () => {
                         type="email"
                         placeholder="Enter your email"
                         icon={<Mail size={18} className="text-gray-400"/>}
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
                         required
                     />
                 </div>
@@ -98,8 +85,6 @@ const Register: React.FC = () => {
                         type="tel"
                         placeholder="Enter your phone number"
                         icon={<Phone size={18} className="text-gray-400"/>}
-                        value={phone}
-                        onChange={(e) => setPhone(e.target.value)}
                         required
                     />
                 </div>
@@ -117,8 +102,6 @@ const Register: React.FC = () => {
                         name="password"
                         placeholder="Create a password"
                         icon={<Lock size={18} className="text-gray-400"/>}
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
                         minLength={8}
                         required
                     />
@@ -151,9 +134,6 @@ const Register: React.FC = () => {
                         id="agree"
                         type="checkbox"
                         className="h-4 w-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500 mt-0.5"
-                        checked={agreed}
-                        onChange={(e) => setAgreed(e.target.checked)}
-                        // required
                     />
                     <label htmlFor="agree" className="text-sm text-gray-600">
                         I agree to the{' '}

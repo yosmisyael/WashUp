@@ -4,20 +4,24 @@ import Logo from '@/components/atoms/Logo';
 import {InputWithIcon, PasswordInput} from '@/components/atoms/Input';
 import {Apple, Chrome, Lock, Mail} from 'lucide-react';
 import Button from '@/components/atoms/Button';
-import {clearFlashMessages, loginCustomer, LoginFormState} from '@/app/(auth)/customers/login/actions';
+import {clearFlashMessages} from '@/app/(auth)/customers/login/actions';
 import React, {
     useActionState,
     useEffect,
 } from 'react';
+import {LoginAction, LoginFormState} from "@/lib/types";
 
 const initialState: LoginFormState = {}
 
-type CustomerLoginFormProps = {
+type LoginFormProps = {
     flashMessage?: string;
+    formTitle?: string;
+    formDesc?: string;
+    action: LoginAction;
 }
 
-export default function CustomerLoginForm({ flashMessage }: CustomerLoginFormProps) {
-    const [state, formAction, pending] = useActionState(loginCustomer, initialState);
+export default function LoginForm({ flashMessage, formTitle, formDesc, action }: LoginFormProps) {
+    const [state, formAction, pending] = useActionState(action, initialState);
 
     useEffect(() => {
         if (flashMessage) clearFlashMessages()
@@ -25,13 +29,17 @@ export default function CustomerLoginForm({ flashMessage }: CustomerLoginFormPro
     }, [flashMessage]);
 
     return (
-        <div className='mx-auto bg-white p-8 sm:p-10 rounded-xl shadow-lg w-full max-w-md'>
+        <div className='mx-auto bg-white p-8 sm:p-10 rounded-xl shadow-lg w-full max-w-xl my-10'>
             {/* Header */}
             <div className='flex flex-col items-center'>
                 <Logo size={4} />
-                <h1 className='text-2xl font-bold text-gray-900 mt-4'>Welcome Back</h1>
+                <h1 className='text-2xl font-bold text-gray-900 mt-4'>
+                    { formTitle ?? "Welcome Back"}
+                </h1>
                 <p className='text-sm text-gray-500 mt-1'>
-                    Login to your account to get started
+                    {
+                        formDesc ?? "Login to your account to get started"
+                    }
                 </p>
             </div>
 

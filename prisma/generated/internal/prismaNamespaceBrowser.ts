@@ -108,6 +108,8 @@ export type LocationScalarFieldEnum = (typeof LocationScalarFieldEnum)[keyof typ
 export const EmployeeScalarFieldEnum = {
   id: 'id',
   name: 'name',
+  email: 'email',
+  password: 'password',
   role: 'role',
   startDate: 'startDate'
 } as const
