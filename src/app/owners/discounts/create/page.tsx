@@ -1,4 +1,3 @@
-// src/app/(pages)/owners/discounts/create/page.tsx
 import React from 'react';
 import Link from 'next/link';
 import { ChevronLeft } from 'lucide-react'; 
@@ -6,10 +5,8 @@ import { DiscountForm } from '@/components/organisms/owners/discounts/DiscountsF
 
 export default function CreateDiscountPage() {
   return (
-    // Kita batasi lebar halaman agar form tidak terlalu lebar
     <div className="mx-auto max-w-4xl">
       
-      {/* 1. Header Halaman (Link "Back" dan Judul) */}
       <div className="mb-6">
         <Link 
           href="/owners/discounts" 
@@ -25,10 +22,8 @@ export default function CreateDiscountPage() {
         </p>
       </div>
 
-      {/* 2. Render Organisme Formulir kita */}
       <DiscountForm />
 
-      {/* Tidak ada HintCard di desain ini, jadi kita biarkan kosong */}
     </div>
   );
 }
