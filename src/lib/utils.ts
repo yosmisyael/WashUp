@@ -55,12 +55,11 @@ export function getInitials(name: string): string {
     return initials.toUpperCase();
 }
 
-<<<<<<< HEAD
 // Tambahkan ini agar komponen bisa pakai cn()
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
-=======
+
 export function formatLocalDatetime(date: Date | null | undefined): string {
     if (!date || isNaN(date.getTime())) {
         return '';
@@ -77,4 +76,3 @@ export function formatLocalDatetime(date: Date | null | undefined): string {
 
     return `${year}-${month}-${day}T${hour}:${minute}`;
 }
->>>>>>> fff4a377197751f12c581c27905ec6199eeec431
