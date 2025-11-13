@@ -3,14 +3,13 @@ import Sidebar from "@/components/molecules/customers/Sidebar";
 import Navbar from "@/components/molecules/Navbar";
 import {SidebarProvider} from "@/context/SidebarContext";
 import {getCurrentSession} from "@/lib/session-repository";
-import {toTitleCase} from "@/lib/utils";
 
 export default async function CustomerLayout({children}: { children: ReactNode }) {
     const session = await getCurrentSession();
 
     const currentUser = {
         name: session?.name ?? "Default Name",
-        role: session?.role ? toTitleCase(session?.role) : "Unknown",
+        role: "Customer",
         avatar: "https://i.pinimg.com/736x/ed/6b/a2/ed6ba283b6e0e65cfa751382d4f344fc.jpg",
     };
 
