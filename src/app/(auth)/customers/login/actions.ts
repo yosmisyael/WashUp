@@ -1,7 +1,7 @@
 'use server';
 
 import {z} from 'zod';
-import {createSession} from '@/lib/session';
+import {createSession} from '@/lib/session-repository';
 import prisma from '@/lib/prisma';
 import {redirect} from 'next/navigation';
 import {cookies} from "next/headers";
@@ -62,7 +62,7 @@ export async function loginCustomer(
         }
 
         await createSession({
-            sub: userQuery.id,
+            sub: userQuery.id.toString(),
             name: userQuery.name,
             email: userQuery.email,
         });

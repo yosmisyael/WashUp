@@ -227,6 +227,8 @@ export type EmployeeWhereInput = {
   history?: Prisma.EmployeeHistoryListRelationFilter
   invoices?: Prisma.InvoiceListRelationFilter
   employeeSession?: Prisma.XOR<Prisma.EmployeeSessionNullableScalarRelationFilter, Prisma.EmployeeSessionWhereInput> | null
+  orderPickup?: Prisma.OrderPickupListRelationFilter
+  orderDelivery?: Prisma.OrderDeliveryListRelationFilter
 }
 
 export type EmployeeOrderByWithRelationInput = {
@@ -239,6 +241,8 @@ export type EmployeeOrderByWithRelationInput = {
   history?: Prisma.EmployeeHistoryOrderByRelationAggregateInput
   invoices?: Prisma.InvoiceOrderByRelationAggregateInput
   employeeSession?: Prisma.EmployeeSessionOrderByWithRelationInput
+  orderPickup?: Prisma.OrderPickupOrderByRelationAggregateInput
+  orderDelivery?: Prisma.OrderDeliveryOrderByRelationAggregateInput
 }
 
 export type EmployeeWhereUniqueInput = Prisma.AtLeast<{
@@ -254,6 +258,8 @@ export type EmployeeWhereUniqueInput = Prisma.AtLeast<{
   history?: Prisma.EmployeeHistoryListRelationFilter
   invoices?: Prisma.InvoiceListRelationFilter
   employeeSession?: Prisma.XOR<Prisma.EmployeeSessionNullableScalarRelationFilter, Prisma.EmployeeSessionWhereInput> | null
+  orderPickup?: Prisma.OrderPickupListRelationFilter
+  orderDelivery?: Prisma.OrderDeliveryListRelationFilter
 }, "id" | "email">
 
 export type EmployeeOrderByWithAggregationInput = {
@@ -291,6 +297,8 @@ export type EmployeeCreateInput = {
   history?: Prisma.EmployeeHistoryCreateNestedManyWithoutEmployeeInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutEmployeeInput
   employeeSession?: Prisma.EmployeeSessionCreateNestedOneWithoutEmployeeInput
+  orderPickup?: Prisma.OrderPickupCreateNestedManyWithoutDriverInput
+  orderDelivery?: Prisma.OrderDeliveryCreateNestedManyWithoutDriverInput
 }
 
 export type EmployeeUncheckedCreateInput = {
@@ -303,6 +311,8 @@ export type EmployeeUncheckedCreateInput = {
   history?: Prisma.EmployeeHistoryUncheckedCreateNestedManyWithoutEmployeeInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutEmployeeInput
   employeeSession?: Prisma.EmployeeSessionUncheckedCreateNestedOneWithoutEmployeeInput
+  orderPickup?: Prisma.OrderPickupUncheckedCreateNestedManyWithoutDriverInput
+  orderDelivery?: Prisma.OrderDeliveryUncheckedCreateNestedManyWithoutDriverInput
 }
 
 export type EmployeeUpdateInput = {
@@ -314,6 +324,8 @@ export type EmployeeUpdateInput = {
   history?: Prisma.EmployeeHistoryUpdateManyWithoutEmployeeNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutEmployeeNestedInput
   employeeSession?: Prisma.EmployeeSessionUpdateOneWithoutEmployeeNestedInput
+  orderPickup?: Prisma.OrderPickupUpdateManyWithoutDriverNestedInput
+  orderDelivery?: Prisma.OrderDeliveryUpdateManyWithoutDriverNestedInput
 }
 
 export type EmployeeUncheckedUpdateInput = {
@@ -326,6 +338,8 @@ export type EmployeeUncheckedUpdateInput = {
   history?: Prisma.EmployeeHistoryUncheckedUpdateManyWithoutEmployeeNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutEmployeeNestedInput
   employeeSession?: Prisma.EmployeeSessionUncheckedUpdateOneWithoutEmployeeNestedInput
+  orderPickup?: Prisma.OrderPickupUncheckedUpdateManyWithoutDriverNestedInput
+  orderDelivery?: Prisma.OrderDeliveryUncheckedUpdateManyWithoutDriverNestedInput
 }
 
 export type EmployeeCreateManyInput = {
@@ -412,6 +426,34 @@ export type EmployeeUpdateOneRequiredWithoutHistoryNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.EmployeeUpdateToOneWithWhereWithoutHistoryInput, Prisma.EmployeeUpdateWithoutHistoryInput>, Prisma.EmployeeUncheckedUpdateWithoutHistoryInput>
 }
 
+export type EmployeeCreateNestedOneWithoutOrderPickupInput = {
+  create?: Prisma.XOR<Prisma.EmployeeCreateWithoutOrderPickupInput, Prisma.EmployeeUncheckedCreateWithoutOrderPickupInput>
+  connectOrCreate?: Prisma.EmployeeCreateOrConnectWithoutOrderPickupInput
+  connect?: Prisma.EmployeeWhereUniqueInput
+}
+
+export type EmployeeUpdateOneRequiredWithoutOrderPickupNestedInput = {
+  create?: Prisma.XOR<Prisma.EmployeeCreateWithoutOrderPickupInput, Prisma.EmployeeUncheckedCreateWithoutOrderPickupInput>
+  connectOrCreate?: Prisma.EmployeeCreateOrConnectWithoutOrderPickupInput
+  upsert?: Prisma.EmployeeUpsertWithoutOrderPickupInput
+  connect?: Prisma.EmployeeWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.EmployeeUpdateToOneWithWhereWithoutOrderPickupInput, Prisma.EmployeeUpdateWithoutOrderPickupInput>, Prisma.EmployeeUncheckedUpdateWithoutOrderPickupInput>
+}
+
+export type EmployeeCreateNestedOneWithoutOrderDeliveryInput = {
+  create?: Prisma.XOR<Prisma.EmployeeCreateWithoutOrderDeliveryInput, Prisma.EmployeeUncheckedCreateWithoutOrderDeliveryInput>
+  connectOrCreate?: Prisma.EmployeeCreateOrConnectWithoutOrderDeliveryInput
+  connect?: Prisma.EmployeeWhereUniqueInput
+}
+
+export type EmployeeUpdateOneRequiredWithoutOrderDeliveryNestedInput = {
+  create?: Prisma.XOR<Prisma.EmployeeCreateWithoutOrderDeliveryInput, Prisma.EmployeeUncheckedCreateWithoutOrderDeliveryInput>
+  connectOrCreate?: Prisma.EmployeeCreateOrConnectWithoutOrderDeliveryInput
+  upsert?: Prisma.EmployeeUpsertWithoutOrderDeliveryInput
+  connect?: Prisma.EmployeeWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.EmployeeUpdateToOneWithWhereWithoutOrderDeliveryInput, Prisma.EmployeeUpdateWithoutOrderDeliveryInput>, Prisma.EmployeeUncheckedUpdateWithoutOrderDeliveryInput>
+}
+
 export type EmployeeCreateNestedOneWithoutEmployeeSessionInput = {
   create?: Prisma.XOR<Prisma.EmployeeCreateWithoutEmployeeSessionInput, Prisma.EmployeeUncheckedCreateWithoutEmployeeSessionInput>
   connectOrCreate?: Prisma.EmployeeCreateOrConnectWithoutEmployeeSessionInput
@@ -448,6 +490,8 @@ export type EmployeeCreateWithoutHistoryInput = {
   startDate?: Date | string
   invoices?: Prisma.InvoiceCreateNestedManyWithoutEmployeeInput
   employeeSession?: Prisma.EmployeeSessionCreateNestedOneWithoutEmployeeInput
+  orderPickup?: Prisma.OrderPickupCreateNestedManyWithoutDriverInput
+  orderDelivery?: Prisma.OrderDeliveryCreateNestedManyWithoutDriverInput
 }
 
 export type EmployeeUncheckedCreateWithoutHistoryInput = {
@@ -459,6 +503,8 @@ export type EmployeeUncheckedCreateWithoutHistoryInput = {
   startDate?: Date | string
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutEmployeeInput
   employeeSession?: Prisma.EmployeeSessionUncheckedCreateNestedOneWithoutEmployeeInput
+  orderPickup?: Prisma.OrderPickupUncheckedCreateNestedManyWithoutDriverInput
+  orderDelivery?: Prisma.OrderDeliveryUncheckedCreateNestedManyWithoutDriverInput
 }
 
 export type EmployeeCreateOrConnectWithoutHistoryInput = {
@@ -485,6 +531,8 @@ export type EmployeeUpdateWithoutHistoryInput = {
   startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   invoices?: Prisma.InvoiceUpdateManyWithoutEmployeeNestedInput
   employeeSession?: Prisma.EmployeeSessionUpdateOneWithoutEmployeeNestedInput
+  orderPickup?: Prisma.OrderPickupUpdateManyWithoutDriverNestedInput
+  orderDelivery?: Prisma.OrderDeliveryUpdateManyWithoutDriverNestedInput
 }
 
 export type EmployeeUncheckedUpdateWithoutHistoryInput = {
@@ -496,6 +544,140 @@ export type EmployeeUncheckedUpdateWithoutHistoryInput = {
   startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutEmployeeNestedInput
   employeeSession?: Prisma.EmployeeSessionUncheckedUpdateOneWithoutEmployeeNestedInput
+  orderPickup?: Prisma.OrderPickupUncheckedUpdateManyWithoutDriverNestedInput
+  orderDelivery?: Prisma.OrderDeliveryUncheckedUpdateManyWithoutDriverNestedInput
+}
+
+export type EmployeeCreateWithoutOrderPickupInput = {
+  name: string
+  email: string
+  password: string
+  role?: $Enums.ROLE
+  startDate?: Date | string
+  history?: Prisma.EmployeeHistoryCreateNestedManyWithoutEmployeeInput
+  invoices?: Prisma.InvoiceCreateNestedManyWithoutEmployeeInput
+  employeeSession?: Prisma.EmployeeSessionCreateNestedOneWithoutEmployeeInput
+  orderDelivery?: Prisma.OrderDeliveryCreateNestedManyWithoutDriverInput
+}
+
+export type EmployeeUncheckedCreateWithoutOrderPickupInput = {
+  id?: number
+  name: string
+  email: string
+  password: string
+  role?: $Enums.ROLE
+  startDate?: Date | string
+  history?: Prisma.EmployeeHistoryUncheckedCreateNestedManyWithoutEmployeeInput
+  invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutEmployeeInput
+  employeeSession?: Prisma.EmployeeSessionUncheckedCreateNestedOneWithoutEmployeeInput
+  orderDelivery?: Prisma.OrderDeliveryUncheckedCreateNestedManyWithoutDriverInput
+}
+
+export type EmployeeCreateOrConnectWithoutOrderPickupInput = {
+  where: Prisma.EmployeeWhereUniqueInput
+  create: Prisma.XOR<Prisma.EmployeeCreateWithoutOrderPickupInput, Prisma.EmployeeUncheckedCreateWithoutOrderPickupInput>
+}
+
+export type EmployeeUpsertWithoutOrderPickupInput = {
+  update: Prisma.XOR<Prisma.EmployeeUpdateWithoutOrderPickupInput, Prisma.EmployeeUncheckedUpdateWithoutOrderPickupInput>
+  create: Prisma.XOR<Prisma.EmployeeCreateWithoutOrderPickupInput, Prisma.EmployeeUncheckedCreateWithoutOrderPickupInput>
+  where?: Prisma.EmployeeWhereInput
+}
+
+export type EmployeeUpdateToOneWithWhereWithoutOrderPickupInput = {
+  where?: Prisma.EmployeeWhereInput
+  data: Prisma.XOR<Prisma.EmployeeUpdateWithoutOrderPickupInput, Prisma.EmployeeUncheckedUpdateWithoutOrderPickupInput>
+}
+
+export type EmployeeUpdateWithoutOrderPickupInput = {
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumROLEFieldUpdateOperationsInput | $Enums.ROLE
+  startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  history?: Prisma.EmployeeHistoryUpdateManyWithoutEmployeeNestedInput
+  invoices?: Prisma.InvoiceUpdateManyWithoutEmployeeNestedInput
+  employeeSession?: Prisma.EmployeeSessionUpdateOneWithoutEmployeeNestedInput
+  orderDelivery?: Prisma.OrderDeliveryUpdateManyWithoutDriverNestedInput
+}
+
+export type EmployeeUncheckedUpdateWithoutOrderPickupInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumROLEFieldUpdateOperationsInput | $Enums.ROLE
+  startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  history?: Prisma.EmployeeHistoryUncheckedUpdateManyWithoutEmployeeNestedInput
+  invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutEmployeeNestedInput
+  employeeSession?: Prisma.EmployeeSessionUncheckedUpdateOneWithoutEmployeeNestedInput
+  orderDelivery?: Prisma.OrderDeliveryUncheckedUpdateManyWithoutDriverNestedInput
+}
+
+export type EmployeeCreateWithoutOrderDeliveryInput = {
+  name: string
+  email: string
+  password: string
+  role?: $Enums.ROLE
+  startDate?: Date | string
+  history?: Prisma.EmployeeHistoryCreateNestedManyWithoutEmployeeInput
+  invoices?: Prisma.InvoiceCreateNestedManyWithoutEmployeeInput
+  employeeSession?: Prisma.EmployeeSessionCreateNestedOneWithoutEmployeeInput
+  orderPickup?: Prisma.OrderPickupCreateNestedManyWithoutDriverInput
+}
+
+export type EmployeeUncheckedCreateWithoutOrderDeliveryInput = {
+  id?: number
+  name: string
+  email: string
+  password: string
+  role?: $Enums.ROLE
+  startDate?: Date | string
+  history?: Prisma.EmployeeHistoryUncheckedCreateNestedManyWithoutEmployeeInput
+  invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutEmployeeInput
+  employeeSession?: Prisma.EmployeeSessionUncheckedCreateNestedOneWithoutEmployeeInput
+  orderPickup?: Prisma.OrderPickupUncheckedCreateNestedManyWithoutDriverInput
+}
+
+export type EmployeeCreateOrConnectWithoutOrderDeliveryInput = {
+  where: Prisma.EmployeeWhereUniqueInput
+  create: Prisma.XOR<Prisma.EmployeeCreateWithoutOrderDeliveryInput, Prisma.EmployeeUncheckedCreateWithoutOrderDeliveryInput>
+}
+
+export type EmployeeUpsertWithoutOrderDeliveryInput = {
+  update: Prisma.XOR<Prisma.EmployeeUpdateWithoutOrderDeliveryInput, Prisma.EmployeeUncheckedUpdateWithoutOrderDeliveryInput>
+  create: Prisma.XOR<Prisma.EmployeeCreateWithoutOrderDeliveryInput, Prisma.EmployeeUncheckedCreateWithoutOrderDeliveryInput>
+  where?: Prisma.EmployeeWhereInput
+}
+
+export type EmployeeUpdateToOneWithWhereWithoutOrderDeliveryInput = {
+  where?: Prisma.EmployeeWhereInput
+  data: Prisma.XOR<Prisma.EmployeeUpdateWithoutOrderDeliveryInput, Prisma.EmployeeUncheckedUpdateWithoutOrderDeliveryInput>
+}
+
+export type EmployeeUpdateWithoutOrderDeliveryInput = {
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumROLEFieldUpdateOperationsInput | $Enums.ROLE
+  startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  history?: Prisma.EmployeeHistoryUpdateManyWithoutEmployeeNestedInput
+  invoices?: Prisma.InvoiceUpdateManyWithoutEmployeeNestedInput
+  employeeSession?: Prisma.EmployeeSessionUpdateOneWithoutEmployeeNestedInput
+  orderPickup?: Prisma.OrderPickupUpdateManyWithoutDriverNestedInput
+}
+
+export type EmployeeUncheckedUpdateWithoutOrderDeliveryInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumROLEFieldUpdateOperationsInput | $Enums.ROLE
+  startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  history?: Prisma.EmployeeHistoryUncheckedUpdateManyWithoutEmployeeNestedInput
+  invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutEmployeeNestedInput
+  employeeSession?: Prisma.EmployeeSessionUncheckedUpdateOneWithoutEmployeeNestedInput
+  orderPickup?: Prisma.OrderPickupUncheckedUpdateManyWithoutDriverNestedInput
 }
 
 export type EmployeeCreateWithoutEmployeeSessionInput = {
@@ -506,6 +688,8 @@ export type EmployeeCreateWithoutEmployeeSessionInput = {
   startDate?: Date | string
   history?: Prisma.EmployeeHistoryCreateNestedManyWithoutEmployeeInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutEmployeeInput
+  orderPickup?: Prisma.OrderPickupCreateNestedManyWithoutDriverInput
+  orderDelivery?: Prisma.OrderDeliveryCreateNestedManyWithoutDriverInput
 }
 
 export type EmployeeUncheckedCreateWithoutEmployeeSessionInput = {
@@ -517,6 +701,8 @@ export type EmployeeUncheckedCreateWithoutEmployeeSessionInput = {
   startDate?: Date | string
   history?: Prisma.EmployeeHistoryUncheckedCreateNestedManyWithoutEmployeeInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutEmployeeInput
+  orderPickup?: Prisma.OrderPickupUncheckedCreateNestedManyWithoutDriverInput
+  orderDelivery?: Prisma.OrderDeliveryUncheckedCreateNestedManyWithoutDriverInput
 }
 
 export type EmployeeCreateOrConnectWithoutEmployeeSessionInput = {
@@ -543,6 +729,8 @@ export type EmployeeUpdateWithoutEmployeeSessionInput = {
   startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   history?: Prisma.EmployeeHistoryUpdateManyWithoutEmployeeNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutEmployeeNestedInput
+  orderPickup?: Prisma.OrderPickupUpdateManyWithoutDriverNestedInput
+  orderDelivery?: Prisma.OrderDeliveryUpdateManyWithoutDriverNestedInput
 }
 
 export type EmployeeUncheckedUpdateWithoutEmployeeSessionInput = {
@@ -554,6 +742,8 @@ export type EmployeeUncheckedUpdateWithoutEmployeeSessionInput = {
   startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   history?: Prisma.EmployeeHistoryUncheckedUpdateManyWithoutEmployeeNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutEmployeeNestedInput
+  orderPickup?: Prisma.OrderPickupUncheckedUpdateManyWithoutDriverNestedInput
+  orderDelivery?: Prisma.OrderDeliveryUncheckedUpdateManyWithoutDriverNestedInput
 }
 
 export type EmployeeCreateWithoutInvoicesInput = {
@@ -564,6 +754,8 @@ export type EmployeeCreateWithoutInvoicesInput = {
   startDate?: Date | string
   history?: Prisma.EmployeeHistoryCreateNestedManyWithoutEmployeeInput
   employeeSession?: Prisma.EmployeeSessionCreateNestedOneWithoutEmployeeInput
+  orderPickup?: Prisma.OrderPickupCreateNestedManyWithoutDriverInput
+  orderDelivery?: Prisma.OrderDeliveryCreateNestedManyWithoutDriverInput
 }
 
 export type EmployeeUncheckedCreateWithoutInvoicesInput = {
@@ -575,6 +767,8 @@ export type EmployeeUncheckedCreateWithoutInvoicesInput = {
   startDate?: Date | string
   history?: Prisma.EmployeeHistoryUncheckedCreateNestedManyWithoutEmployeeInput
   employeeSession?: Prisma.EmployeeSessionUncheckedCreateNestedOneWithoutEmployeeInput
+  orderPickup?: Prisma.OrderPickupUncheckedCreateNestedManyWithoutDriverInput
+  orderDelivery?: Prisma.OrderDeliveryUncheckedCreateNestedManyWithoutDriverInput
 }
 
 export type EmployeeCreateOrConnectWithoutInvoicesInput = {
@@ -601,6 +795,8 @@ export type EmployeeUpdateWithoutInvoicesInput = {
   startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   history?: Prisma.EmployeeHistoryUpdateManyWithoutEmployeeNestedInput
   employeeSession?: Prisma.EmployeeSessionUpdateOneWithoutEmployeeNestedInput
+  orderPickup?: Prisma.OrderPickupUpdateManyWithoutDriverNestedInput
+  orderDelivery?: Prisma.OrderDeliveryUpdateManyWithoutDriverNestedInput
 }
 
 export type EmployeeUncheckedUpdateWithoutInvoicesInput = {
@@ -612,6 +808,8 @@ export type EmployeeUncheckedUpdateWithoutInvoicesInput = {
   startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   history?: Prisma.EmployeeHistoryUncheckedUpdateManyWithoutEmployeeNestedInput
   employeeSession?: Prisma.EmployeeSessionUncheckedUpdateOneWithoutEmployeeNestedInput
+  orderPickup?: Prisma.OrderPickupUncheckedUpdateManyWithoutDriverNestedInput
+  orderDelivery?: Prisma.OrderDeliveryUncheckedUpdateManyWithoutDriverNestedInput
 }
 
 
@@ -622,11 +820,15 @@ export type EmployeeUncheckedUpdateWithoutInvoicesInput = {
 export type EmployeeCountOutputType = {
   history: number
   invoices: number
+  orderPickup: number
+  orderDelivery: number
 }
 
 export type EmployeeCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   history?: boolean | EmployeeCountOutputTypeCountHistoryArgs
   invoices?: boolean | EmployeeCountOutputTypeCountInvoicesArgs
+  orderPickup?: boolean | EmployeeCountOutputTypeCountOrderPickupArgs
+  orderDelivery?: boolean | EmployeeCountOutputTypeCountOrderDeliveryArgs
 }
 
 /**
@@ -653,6 +855,20 @@ export type EmployeeCountOutputTypeCountInvoicesArgs<ExtArgs extends runtime.Typ
   where?: Prisma.InvoiceWhereInput
 }
 
+/**
+ * EmployeeCountOutputType without action
+ */
+export type EmployeeCountOutputTypeCountOrderPickupArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.OrderPickupWhereInput
+}
+
+/**
+ * EmployeeCountOutputType without action
+ */
+export type EmployeeCountOutputTypeCountOrderDeliveryArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.OrderDeliveryWhereInput
+}
+
 
 export type EmployeeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -664,6 +880,8 @@ export type EmployeeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   history?: boolean | Prisma.Employee$historyArgs<ExtArgs>
   invoices?: boolean | Prisma.Employee$invoicesArgs<ExtArgs>
   employeeSession?: boolean | Prisma.Employee$employeeSessionArgs<ExtArgs>
+  orderPickup?: boolean | Prisma.Employee$orderPickupArgs<ExtArgs>
+  orderDelivery?: boolean | Prisma.Employee$orderDeliveryArgs<ExtArgs>
   _count?: boolean | Prisma.EmployeeCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["employee"]>
 
@@ -699,6 +917,8 @@ export type EmployeeInclude<ExtArgs extends runtime.Types.Extensions.InternalArg
   history?: boolean | Prisma.Employee$historyArgs<ExtArgs>
   invoices?: boolean | Prisma.Employee$invoicesArgs<ExtArgs>
   employeeSession?: boolean | Prisma.Employee$employeeSessionArgs<ExtArgs>
+  orderPickup?: boolean | Prisma.Employee$orderPickupArgs<ExtArgs>
+  orderDelivery?: boolean | Prisma.Employee$orderDeliveryArgs<ExtArgs>
   _count?: boolean | Prisma.EmployeeCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type EmployeeIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -710,6 +930,8 @@ export type $EmployeePayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     history: Prisma.$EmployeeHistoryPayload<ExtArgs>[]
     invoices: Prisma.$InvoicePayload<ExtArgs>[]
     employeeSession: Prisma.$EmployeeSessionPayload<ExtArgs> | null
+    orderPickup: Prisma.$OrderPickupPayload<ExtArgs>[]
+    orderDelivery: Prisma.$OrderDeliveryPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -1115,6 +1337,8 @@ export interface Prisma__EmployeeClient<T, Null = never, ExtArgs extends runtime
   history<T extends Prisma.Employee$historyArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Employee$historyArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EmployeeHistoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   invoices<T extends Prisma.Employee$invoicesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Employee$invoicesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$InvoicePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   employeeSession<T extends Prisma.Employee$employeeSessionArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Employee$employeeSessionArgs<ExtArgs>>): Prisma.Prisma__EmployeeSessionClient<runtime.Types.Result.GetResult<Prisma.$EmployeeSessionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  orderPickup<T extends Prisma.Employee$orderPickupArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Employee$orderPickupArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$OrderPickupPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  orderDelivery<T extends Prisma.Employee$orderDeliveryArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Employee$orderDeliveryArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$OrderDeliveryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1602,6 +1826,54 @@ export type Employee$employeeSessionArgs<ExtArgs extends runtime.Types.Extension
    */
   include?: Prisma.EmployeeSessionInclude<ExtArgs> | null
   where?: Prisma.EmployeeSessionWhereInput
+}
+
+/**
+ * Employee.orderPickup
+ */
+export type Employee$orderPickupArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the OrderPickup
+   */
+  select?: Prisma.OrderPickupSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the OrderPickup
+   */
+  omit?: Prisma.OrderPickupOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.OrderPickupInclude<ExtArgs> | null
+  where?: Prisma.OrderPickupWhereInput
+  orderBy?: Prisma.OrderPickupOrderByWithRelationInput | Prisma.OrderPickupOrderByWithRelationInput[]
+  cursor?: Prisma.OrderPickupWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.OrderPickupScalarFieldEnum | Prisma.OrderPickupScalarFieldEnum[]
+}
+
+/**
+ * Employee.orderDelivery
+ */
+export type Employee$orderDeliveryArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the OrderDelivery
+   */
+  select?: Prisma.OrderDeliverySelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the OrderDelivery
+   */
+  omit?: Prisma.OrderDeliveryOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.OrderDeliveryInclude<ExtArgs> | null
+  where?: Prisma.OrderDeliveryWhereInput
+  orderBy?: Prisma.OrderDeliveryOrderByWithRelationInput | Prisma.OrderDeliveryOrderByWithRelationInput[]
+  cursor?: Prisma.OrderDeliveryWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.OrderDeliveryScalarFieldEnum | Prisma.OrderDeliveryScalarFieldEnum[]
 }
 
 /**

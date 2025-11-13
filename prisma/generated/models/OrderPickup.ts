@@ -205,6 +205,7 @@ export type OrderPickupWhereInput = {
   driverId?: Prisma.IntFilter<"OrderPickup"> | number
   pickupTime?: Prisma.DateTimeFilter<"OrderPickup"> | Date | string
   order?: Prisma.XOR<Prisma.OrderScalarRelationFilter, Prisma.OrderWhereInput>
+  driver?: Prisma.XOR<Prisma.EmployeeScalarRelationFilter, Prisma.EmployeeWhereInput>
 }
 
 export type OrderPickupOrderByWithRelationInput = {
@@ -212,6 +213,7 @@ export type OrderPickupOrderByWithRelationInput = {
   driverId?: Prisma.SortOrder
   pickupTime?: Prisma.SortOrder
   order?: Prisma.OrderOrderByWithRelationInput
+  driver?: Prisma.EmployeeOrderByWithRelationInput
 }
 
 export type OrderPickupWhereUniqueInput = Prisma.AtLeast<{
@@ -222,6 +224,7 @@ export type OrderPickupWhereUniqueInput = Prisma.AtLeast<{
   driverId?: Prisma.IntFilter<"OrderPickup"> | number
   pickupTime?: Prisma.DateTimeFilter<"OrderPickup"> | Date | string
   order?: Prisma.XOR<Prisma.OrderScalarRelationFilter, Prisma.OrderWhereInput>
+  driver?: Prisma.XOR<Prisma.EmployeeScalarRelationFilter, Prisma.EmployeeWhereInput>
 }, "orderId">
 
 export type OrderPickupOrderByWithAggregationInput = {
@@ -245,9 +248,9 @@ export type OrderPickupScalarWhereWithAggregatesInput = {
 }
 
 export type OrderPickupCreateInput = {
-  driverId: number
   pickupTime: Date | string
   order: Prisma.OrderCreateNestedOneWithoutOrderPickupInput
+  driver: Prisma.EmployeeCreateNestedOneWithoutOrderPickupInput
 }
 
 export type OrderPickupUncheckedCreateInput = {
@@ -257,9 +260,9 @@ export type OrderPickupUncheckedCreateInput = {
 }
 
 export type OrderPickupUpdateInput = {
-  driverId?: Prisma.IntFieldUpdateOperationsInput | number
   pickupTime?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   order?: Prisma.OrderUpdateOneRequiredWithoutOrderPickupNestedInput
+  driver?: Prisma.EmployeeUpdateOneRequiredWithoutOrderPickupNestedInput
 }
 
 export type OrderPickupUncheckedUpdateInput = {
@@ -275,7 +278,6 @@ export type OrderPickupCreateManyInput = {
 }
 
 export type OrderPickupUpdateManyMutationInput = {
-  driverId?: Prisma.IntFieldUpdateOperationsInput | number
   pickupTime?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -283,6 +285,16 @@ export type OrderPickupUncheckedUpdateManyInput = {
   orderId?: Prisma.IntFieldUpdateOperationsInput | number
   driverId?: Prisma.IntFieldUpdateOperationsInput | number
   pickupTime?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type OrderPickupListRelationFilter = {
+  every?: Prisma.OrderPickupWhereInput
+  some?: Prisma.OrderPickupWhereInput
+  none?: Prisma.OrderPickupWhereInput
+}
+
+export type OrderPickupOrderByRelationAggregateInput = {
+  _count?: Prisma.SortOrder
 }
 
 export type OrderPickupNullableScalarRelationFilter = {
@@ -318,6 +330,48 @@ export type OrderPickupSumOrderByAggregateInput = {
   driverId?: Prisma.SortOrder
 }
 
+export type OrderPickupCreateNestedManyWithoutDriverInput = {
+  create?: Prisma.XOR<Prisma.OrderPickupCreateWithoutDriverInput, Prisma.OrderPickupUncheckedCreateWithoutDriverInput> | Prisma.OrderPickupCreateWithoutDriverInput[] | Prisma.OrderPickupUncheckedCreateWithoutDriverInput[]
+  connectOrCreate?: Prisma.OrderPickupCreateOrConnectWithoutDriverInput | Prisma.OrderPickupCreateOrConnectWithoutDriverInput[]
+  createMany?: Prisma.OrderPickupCreateManyDriverInputEnvelope
+  connect?: Prisma.OrderPickupWhereUniqueInput | Prisma.OrderPickupWhereUniqueInput[]
+}
+
+export type OrderPickupUncheckedCreateNestedManyWithoutDriverInput = {
+  create?: Prisma.XOR<Prisma.OrderPickupCreateWithoutDriverInput, Prisma.OrderPickupUncheckedCreateWithoutDriverInput> | Prisma.OrderPickupCreateWithoutDriverInput[] | Prisma.OrderPickupUncheckedCreateWithoutDriverInput[]
+  connectOrCreate?: Prisma.OrderPickupCreateOrConnectWithoutDriverInput | Prisma.OrderPickupCreateOrConnectWithoutDriverInput[]
+  createMany?: Prisma.OrderPickupCreateManyDriverInputEnvelope
+  connect?: Prisma.OrderPickupWhereUniqueInput | Prisma.OrderPickupWhereUniqueInput[]
+}
+
+export type OrderPickupUpdateManyWithoutDriverNestedInput = {
+  create?: Prisma.XOR<Prisma.OrderPickupCreateWithoutDriverInput, Prisma.OrderPickupUncheckedCreateWithoutDriverInput> | Prisma.OrderPickupCreateWithoutDriverInput[] | Prisma.OrderPickupUncheckedCreateWithoutDriverInput[]
+  connectOrCreate?: Prisma.OrderPickupCreateOrConnectWithoutDriverInput | Prisma.OrderPickupCreateOrConnectWithoutDriverInput[]
+  upsert?: Prisma.OrderPickupUpsertWithWhereUniqueWithoutDriverInput | Prisma.OrderPickupUpsertWithWhereUniqueWithoutDriverInput[]
+  createMany?: Prisma.OrderPickupCreateManyDriverInputEnvelope
+  set?: Prisma.OrderPickupWhereUniqueInput | Prisma.OrderPickupWhereUniqueInput[]
+  disconnect?: Prisma.OrderPickupWhereUniqueInput | Prisma.OrderPickupWhereUniqueInput[]
+  delete?: Prisma.OrderPickupWhereUniqueInput | Prisma.OrderPickupWhereUniqueInput[]
+  connect?: Prisma.OrderPickupWhereUniqueInput | Prisma.OrderPickupWhereUniqueInput[]
+  update?: Prisma.OrderPickupUpdateWithWhereUniqueWithoutDriverInput | Prisma.OrderPickupUpdateWithWhereUniqueWithoutDriverInput[]
+  updateMany?: Prisma.OrderPickupUpdateManyWithWhereWithoutDriverInput | Prisma.OrderPickupUpdateManyWithWhereWithoutDriverInput[]
+  deleteMany?: Prisma.OrderPickupScalarWhereInput | Prisma.OrderPickupScalarWhereInput[]
+}
+
+export type OrderPickupUncheckedUpdateManyWithoutDriverNestedInput = {
+  create?: Prisma.XOR<Prisma.OrderPickupCreateWithoutDriverInput, Prisma.OrderPickupUncheckedCreateWithoutDriverInput> | Prisma.OrderPickupCreateWithoutDriverInput[] | Prisma.OrderPickupUncheckedCreateWithoutDriverInput[]
+  connectOrCreate?: Prisma.OrderPickupCreateOrConnectWithoutDriverInput | Prisma.OrderPickupCreateOrConnectWithoutDriverInput[]
+  upsert?: Prisma.OrderPickupUpsertWithWhereUniqueWithoutDriverInput | Prisma.OrderPickupUpsertWithWhereUniqueWithoutDriverInput[]
+  createMany?: Prisma.OrderPickupCreateManyDriverInputEnvelope
+  set?: Prisma.OrderPickupWhereUniqueInput | Prisma.OrderPickupWhereUniqueInput[]
+  disconnect?: Prisma.OrderPickupWhereUniqueInput | Prisma.OrderPickupWhereUniqueInput[]
+  delete?: Prisma.OrderPickupWhereUniqueInput | Prisma.OrderPickupWhereUniqueInput[]
+  connect?: Prisma.OrderPickupWhereUniqueInput | Prisma.OrderPickupWhereUniqueInput[]
+  update?: Prisma.OrderPickupUpdateWithWhereUniqueWithoutDriverInput | Prisma.OrderPickupUpdateWithWhereUniqueWithoutDriverInput[]
+  updateMany?: Prisma.OrderPickupUpdateManyWithWhereWithoutDriverInput | Prisma.OrderPickupUpdateManyWithWhereWithoutDriverInput[]
+  deleteMany?: Prisma.OrderPickupScalarWhereInput | Prisma.OrderPickupScalarWhereInput[]
+}
+
 export type OrderPickupCreateNestedOneWithoutOrderInput = {
   create?: Prisma.XOR<Prisma.OrderPickupCreateWithoutOrderInput, Prisma.OrderPickupUncheckedCreateWithoutOrderInput>
   connectOrCreate?: Prisma.OrderPickupCreateOrConnectWithoutOrderInput
@@ -350,9 +404,54 @@ export type OrderPickupUncheckedUpdateOneWithoutOrderNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.OrderPickupUpdateToOneWithWhereWithoutOrderInput, Prisma.OrderPickupUpdateWithoutOrderInput>, Prisma.OrderPickupUncheckedUpdateWithoutOrderInput>
 }
 
-export type OrderPickupCreateWithoutOrderInput = {
-  driverId: number
+export type OrderPickupCreateWithoutDriverInput = {
   pickupTime: Date | string
+  order: Prisma.OrderCreateNestedOneWithoutOrderPickupInput
+}
+
+export type OrderPickupUncheckedCreateWithoutDriverInput = {
+  orderId: number
+  pickupTime: Date | string
+}
+
+export type OrderPickupCreateOrConnectWithoutDriverInput = {
+  where: Prisma.OrderPickupWhereUniqueInput
+  create: Prisma.XOR<Prisma.OrderPickupCreateWithoutDriverInput, Prisma.OrderPickupUncheckedCreateWithoutDriverInput>
+}
+
+export type OrderPickupCreateManyDriverInputEnvelope = {
+  data: Prisma.OrderPickupCreateManyDriverInput | Prisma.OrderPickupCreateManyDriverInput[]
+  skipDuplicates?: boolean
+}
+
+export type OrderPickupUpsertWithWhereUniqueWithoutDriverInput = {
+  where: Prisma.OrderPickupWhereUniqueInput
+  update: Prisma.XOR<Prisma.OrderPickupUpdateWithoutDriverInput, Prisma.OrderPickupUncheckedUpdateWithoutDriverInput>
+  create: Prisma.XOR<Prisma.OrderPickupCreateWithoutDriverInput, Prisma.OrderPickupUncheckedCreateWithoutDriverInput>
+}
+
+export type OrderPickupUpdateWithWhereUniqueWithoutDriverInput = {
+  where: Prisma.OrderPickupWhereUniqueInput
+  data: Prisma.XOR<Prisma.OrderPickupUpdateWithoutDriverInput, Prisma.OrderPickupUncheckedUpdateWithoutDriverInput>
+}
+
+export type OrderPickupUpdateManyWithWhereWithoutDriverInput = {
+  where: Prisma.OrderPickupScalarWhereInput
+  data: Prisma.XOR<Prisma.OrderPickupUpdateManyMutationInput, Prisma.OrderPickupUncheckedUpdateManyWithoutDriverInput>
+}
+
+export type OrderPickupScalarWhereInput = {
+  AND?: Prisma.OrderPickupScalarWhereInput | Prisma.OrderPickupScalarWhereInput[]
+  OR?: Prisma.OrderPickupScalarWhereInput[]
+  NOT?: Prisma.OrderPickupScalarWhereInput | Prisma.OrderPickupScalarWhereInput[]
+  orderId?: Prisma.IntFilter<"OrderPickup"> | number
+  driverId?: Prisma.IntFilter<"OrderPickup"> | number
+  pickupTime?: Prisma.DateTimeFilter<"OrderPickup"> | Date | string
+}
+
+export type OrderPickupCreateWithoutOrderInput = {
+  pickupTime: Date | string
+  driver: Prisma.EmployeeCreateNestedOneWithoutOrderPickupInput
 }
 
 export type OrderPickupUncheckedCreateWithoutOrderInput = {
@@ -377,12 +476,32 @@ export type OrderPickupUpdateToOneWithWhereWithoutOrderInput = {
 }
 
 export type OrderPickupUpdateWithoutOrderInput = {
-  driverId?: Prisma.IntFieldUpdateOperationsInput | number
   pickupTime?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  driver?: Prisma.EmployeeUpdateOneRequiredWithoutOrderPickupNestedInput
 }
 
 export type OrderPickupUncheckedUpdateWithoutOrderInput = {
   driverId?: Prisma.IntFieldUpdateOperationsInput | number
+  pickupTime?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type OrderPickupCreateManyDriverInput = {
+  orderId: number
+  pickupTime: Date | string
+}
+
+export type OrderPickupUpdateWithoutDriverInput = {
+  pickupTime?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  order?: Prisma.OrderUpdateOneRequiredWithoutOrderPickupNestedInput
+}
+
+export type OrderPickupUncheckedUpdateWithoutDriverInput = {
+  orderId?: Prisma.IntFieldUpdateOperationsInput | number
+  pickupTime?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type OrderPickupUncheckedUpdateManyWithoutDriverInput = {
+  orderId?: Prisma.IntFieldUpdateOperationsInput | number
   pickupTime?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -393,6 +512,7 @@ export type OrderPickupSelect<ExtArgs extends runtime.Types.Extensions.InternalA
   driverId?: boolean
   pickupTime?: boolean
   order?: boolean | Prisma.OrderDefaultArgs<ExtArgs>
+  driver?: boolean | Prisma.EmployeeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["orderPickup"]>
 
 export type OrderPickupSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -400,6 +520,7 @@ export type OrderPickupSelectCreateManyAndReturn<ExtArgs extends runtime.Types.E
   driverId?: boolean
   pickupTime?: boolean
   order?: boolean | Prisma.OrderDefaultArgs<ExtArgs>
+  driver?: boolean | Prisma.EmployeeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["orderPickup"]>
 
 export type OrderPickupSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -407,6 +528,7 @@ export type OrderPickupSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.E
   driverId?: boolean
   pickupTime?: boolean
   order?: boolean | Prisma.OrderDefaultArgs<ExtArgs>
+  driver?: boolean | Prisma.EmployeeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["orderPickup"]>
 
 export type OrderPickupSelectScalar = {
@@ -418,18 +540,22 @@ export type OrderPickupSelectScalar = {
 export type OrderPickupOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"orderId" | "driverId" | "pickupTime", ExtArgs["result"]["orderPickup"]>
 export type OrderPickupInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   order?: boolean | Prisma.OrderDefaultArgs<ExtArgs>
+  driver?: boolean | Prisma.EmployeeDefaultArgs<ExtArgs>
 }
 export type OrderPickupIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   order?: boolean | Prisma.OrderDefaultArgs<ExtArgs>
+  driver?: boolean | Prisma.EmployeeDefaultArgs<ExtArgs>
 }
 export type OrderPickupIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   order?: boolean | Prisma.OrderDefaultArgs<ExtArgs>
+  driver?: boolean | Prisma.EmployeeDefaultArgs<ExtArgs>
 }
 
 export type $OrderPickupPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "OrderPickup"
   objects: {
     order: Prisma.$OrderPayload<ExtArgs>
+    driver: Prisma.$EmployeePayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     orderId: number
@@ -830,6 +956,7 @@ readonly fields: OrderPickupFieldRefs;
 export interface Prisma__OrderPickupClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   order<T extends Prisma.OrderDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.OrderDefaultArgs<ExtArgs>>): Prisma.Prisma__OrderClient<runtime.Types.Result.GetResult<Prisma.$OrderPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  driver<T extends Prisma.EmployeeDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.EmployeeDefaultArgs<ExtArgs>>): Prisma.Prisma__EmployeeClient<runtime.Types.Result.GetResult<Prisma.$EmployeePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.

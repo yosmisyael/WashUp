@@ -205,6 +205,7 @@ export type OrderDeliveryWhereInput = {
   driverId?: Prisma.IntFilter<"OrderDelivery"> | number
   arrivalTime?: Prisma.DateTimeFilter<"OrderDelivery"> | Date | string
   order?: Prisma.XOR<Prisma.OrderScalarRelationFilter, Prisma.OrderWhereInput>
+  driver?: Prisma.XOR<Prisma.EmployeeScalarRelationFilter, Prisma.EmployeeWhereInput>
 }
 
 export type OrderDeliveryOrderByWithRelationInput = {
@@ -212,6 +213,7 @@ export type OrderDeliveryOrderByWithRelationInput = {
   driverId?: Prisma.SortOrder
   arrivalTime?: Prisma.SortOrder
   order?: Prisma.OrderOrderByWithRelationInput
+  driver?: Prisma.EmployeeOrderByWithRelationInput
 }
 
 export type OrderDeliveryWhereUniqueInput = Prisma.AtLeast<{
@@ -222,6 +224,7 @@ export type OrderDeliveryWhereUniqueInput = Prisma.AtLeast<{
   driverId?: Prisma.IntFilter<"OrderDelivery"> | number
   arrivalTime?: Prisma.DateTimeFilter<"OrderDelivery"> | Date | string
   order?: Prisma.XOR<Prisma.OrderScalarRelationFilter, Prisma.OrderWhereInput>
+  driver?: Prisma.XOR<Prisma.EmployeeScalarRelationFilter, Prisma.EmployeeWhereInput>
 }, "orderId">
 
 export type OrderDeliveryOrderByWithAggregationInput = {
@@ -245,9 +248,9 @@ export type OrderDeliveryScalarWhereWithAggregatesInput = {
 }
 
 export type OrderDeliveryCreateInput = {
-  driverId: number
   arrivalTime: Date | string
   order: Prisma.OrderCreateNestedOneWithoutOrderDeliveryInput
+  driver: Prisma.EmployeeCreateNestedOneWithoutOrderDeliveryInput
 }
 
 export type OrderDeliveryUncheckedCreateInput = {
@@ -257,9 +260,9 @@ export type OrderDeliveryUncheckedCreateInput = {
 }
 
 export type OrderDeliveryUpdateInput = {
-  driverId?: Prisma.IntFieldUpdateOperationsInput | number
   arrivalTime?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   order?: Prisma.OrderUpdateOneRequiredWithoutOrderDeliveryNestedInput
+  driver?: Prisma.EmployeeUpdateOneRequiredWithoutOrderDeliveryNestedInput
 }
 
 export type OrderDeliveryUncheckedUpdateInput = {
@@ -275,7 +278,6 @@ export type OrderDeliveryCreateManyInput = {
 }
 
 export type OrderDeliveryUpdateManyMutationInput = {
-  driverId?: Prisma.IntFieldUpdateOperationsInput | number
   arrivalTime?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -283,6 +285,16 @@ export type OrderDeliveryUncheckedUpdateManyInput = {
   orderId?: Prisma.IntFieldUpdateOperationsInput | number
   driverId?: Prisma.IntFieldUpdateOperationsInput | number
   arrivalTime?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type OrderDeliveryListRelationFilter = {
+  every?: Prisma.OrderDeliveryWhereInput
+  some?: Prisma.OrderDeliveryWhereInput
+  none?: Prisma.OrderDeliveryWhereInput
+}
+
+export type OrderDeliveryOrderByRelationAggregateInput = {
+  _count?: Prisma.SortOrder
 }
 
 export type OrderDeliveryNullableScalarRelationFilter = {
@@ -318,6 +330,48 @@ export type OrderDeliverySumOrderByAggregateInput = {
   driverId?: Prisma.SortOrder
 }
 
+export type OrderDeliveryCreateNestedManyWithoutDriverInput = {
+  create?: Prisma.XOR<Prisma.OrderDeliveryCreateWithoutDriverInput, Prisma.OrderDeliveryUncheckedCreateWithoutDriverInput> | Prisma.OrderDeliveryCreateWithoutDriverInput[] | Prisma.OrderDeliveryUncheckedCreateWithoutDriverInput[]
+  connectOrCreate?: Prisma.OrderDeliveryCreateOrConnectWithoutDriverInput | Prisma.OrderDeliveryCreateOrConnectWithoutDriverInput[]
+  createMany?: Prisma.OrderDeliveryCreateManyDriverInputEnvelope
+  connect?: Prisma.OrderDeliveryWhereUniqueInput | Prisma.OrderDeliveryWhereUniqueInput[]
+}
+
+export type OrderDeliveryUncheckedCreateNestedManyWithoutDriverInput = {
+  create?: Prisma.XOR<Prisma.OrderDeliveryCreateWithoutDriverInput, Prisma.OrderDeliveryUncheckedCreateWithoutDriverInput> | Prisma.OrderDeliveryCreateWithoutDriverInput[] | Prisma.OrderDeliveryUncheckedCreateWithoutDriverInput[]
+  connectOrCreate?: Prisma.OrderDeliveryCreateOrConnectWithoutDriverInput | Prisma.OrderDeliveryCreateOrConnectWithoutDriverInput[]
+  createMany?: Prisma.OrderDeliveryCreateManyDriverInputEnvelope
+  connect?: Prisma.OrderDeliveryWhereUniqueInput | Prisma.OrderDeliveryWhereUniqueInput[]
+}
+
+export type OrderDeliveryUpdateManyWithoutDriverNestedInput = {
+  create?: Prisma.XOR<Prisma.OrderDeliveryCreateWithoutDriverInput, Prisma.OrderDeliveryUncheckedCreateWithoutDriverInput> | Prisma.OrderDeliveryCreateWithoutDriverInput[] | Prisma.OrderDeliveryUncheckedCreateWithoutDriverInput[]
+  connectOrCreate?: Prisma.OrderDeliveryCreateOrConnectWithoutDriverInput | Prisma.OrderDeliveryCreateOrConnectWithoutDriverInput[]
+  upsert?: Prisma.OrderDeliveryUpsertWithWhereUniqueWithoutDriverInput | Prisma.OrderDeliveryUpsertWithWhereUniqueWithoutDriverInput[]
+  createMany?: Prisma.OrderDeliveryCreateManyDriverInputEnvelope
+  set?: Prisma.OrderDeliveryWhereUniqueInput | Prisma.OrderDeliveryWhereUniqueInput[]
+  disconnect?: Prisma.OrderDeliveryWhereUniqueInput | Prisma.OrderDeliveryWhereUniqueInput[]
+  delete?: Prisma.OrderDeliveryWhereUniqueInput | Prisma.OrderDeliveryWhereUniqueInput[]
+  connect?: Prisma.OrderDeliveryWhereUniqueInput | Prisma.OrderDeliveryWhereUniqueInput[]
+  update?: Prisma.OrderDeliveryUpdateWithWhereUniqueWithoutDriverInput | Prisma.OrderDeliveryUpdateWithWhereUniqueWithoutDriverInput[]
+  updateMany?: Prisma.OrderDeliveryUpdateManyWithWhereWithoutDriverInput | Prisma.OrderDeliveryUpdateManyWithWhereWithoutDriverInput[]
+  deleteMany?: Prisma.OrderDeliveryScalarWhereInput | Prisma.OrderDeliveryScalarWhereInput[]
+}
+
+export type OrderDeliveryUncheckedUpdateManyWithoutDriverNestedInput = {
+  create?: Prisma.XOR<Prisma.OrderDeliveryCreateWithoutDriverInput, Prisma.OrderDeliveryUncheckedCreateWithoutDriverInput> | Prisma.OrderDeliveryCreateWithoutDriverInput[] | Prisma.OrderDeliveryUncheckedCreateWithoutDriverInput[]
+  connectOrCreate?: Prisma.OrderDeliveryCreateOrConnectWithoutDriverInput | Prisma.OrderDeliveryCreateOrConnectWithoutDriverInput[]
+  upsert?: Prisma.OrderDeliveryUpsertWithWhereUniqueWithoutDriverInput | Prisma.OrderDeliveryUpsertWithWhereUniqueWithoutDriverInput[]
+  createMany?: Prisma.OrderDeliveryCreateManyDriverInputEnvelope
+  set?: Prisma.OrderDeliveryWhereUniqueInput | Prisma.OrderDeliveryWhereUniqueInput[]
+  disconnect?: Prisma.OrderDeliveryWhereUniqueInput | Prisma.OrderDeliveryWhereUniqueInput[]
+  delete?: Prisma.OrderDeliveryWhereUniqueInput | Prisma.OrderDeliveryWhereUniqueInput[]
+  connect?: Prisma.OrderDeliveryWhereUniqueInput | Prisma.OrderDeliveryWhereUniqueInput[]
+  update?: Prisma.OrderDeliveryUpdateWithWhereUniqueWithoutDriverInput | Prisma.OrderDeliveryUpdateWithWhereUniqueWithoutDriverInput[]
+  updateMany?: Prisma.OrderDeliveryUpdateManyWithWhereWithoutDriverInput | Prisma.OrderDeliveryUpdateManyWithWhereWithoutDriverInput[]
+  deleteMany?: Prisma.OrderDeliveryScalarWhereInput | Prisma.OrderDeliveryScalarWhereInput[]
+}
+
 export type OrderDeliveryCreateNestedOneWithoutOrderInput = {
   create?: Prisma.XOR<Prisma.OrderDeliveryCreateWithoutOrderInput, Prisma.OrderDeliveryUncheckedCreateWithoutOrderInput>
   connectOrCreate?: Prisma.OrderDeliveryCreateOrConnectWithoutOrderInput
@@ -350,9 +404,54 @@ export type OrderDeliveryUncheckedUpdateOneWithoutOrderNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.OrderDeliveryUpdateToOneWithWhereWithoutOrderInput, Prisma.OrderDeliveryUpdateWithoutOrderInput>, Prisma.OrderDeliveryUncheckedUpdateWithoutOrderInput>
 }
 
-export type OrderDeliveryCreateWithoutOrderInput = {
-  driverId: number
+export type OrderDeliveryCreateWithoutDriverInput = {
   arrivalTime: Date | string
+  order: Prisma.OrderCreateNestedOneWithoutOrderDeliveryInput
+}
+
+export type OrderDeliveryUncheckedCreateWithoutDriverInput = {
+  orderId: number
+  arrivalTime: Date | string
+}
+
+export type OrderDeliveryCreateOrConnectWithoutDriverInput = {
+  where: Prisma.OrderDeliveryWhereUniqueInput
+  create: Prisma.XOR<Prisma.OrderDeliveryCreateWithoutDriverInput, Prisma.OrderDeliveryUncheckedCreateWithoutDriverInput>
+}
+
+export type OrderDeliveryCreateManyDriverInputEnvelope = {
+  data: Prisma.OrderDeliveryCreateManyDriverInput | Prisma.OrderDeliveryCreateManyDriverInput[]
+  skipDuplicates?: boolean
+}
+
+export type OrderDeliveryUpsertWithWhereUniqueWithoutDriverInput = {
+  where: Prisma.OrderDeliveryWhereUniqueInput
+  update: Prisma.XOR<Prisma.OrderDeliveryUpdateWithoutDriverInput, Prisma.OrderDeliveryUncheckedUpdateWithoutDriverInput>
+  create: Prisma.XOR<Prisma.OrderDeliveryCreateWithoutDriverInput, Prisma.OrderDeliveryUncheckedCreateWithoutDriverInput>
+}
+
+export type OrderDeliveryUpdateWithWhereUniqueWithoutDriverInput = {
+  where: Prisma.OrderDeliveryWhereUniqueInput
+  data: Prisma.XOR<Prisma.OrderDeliveryUpdateWithoutDriverInput, Prisma.OrderDeliveryUncheckedUpdateWithoutDriverInput>
+}
+
+export type OrderDeliveryUpdateManyWithWhereWithoutDriverInput = {
+  where: Prisma.OrderDeliveryScalarWhereInput
+  data: Prisma.XOR<Prisma.OrderDeliveryUpdateManyMutationInput, Prisma.OrderDeliveryUncheckedUpdateManyWithoutDriverInput>
+}
+
+export type OrderDeliveryScalarWhereInput = {
+  AND?: Prisma.OrderDeliveryScalarWhereInput | Prisma.OrderDeliveryScalarWhereInput[]
+  OR?: Prisma.OrderDeliveryScalarWhereInput[]
+  NOT?: Prisma.OrderDeliveryScalarWhereInput | Prisma.OrderDeliveryScalarWhereInput[]
+  orderId?: Prisma.IntFilter<"OrderDelivery"> | number
+  driverId?: Prisma.IntFilter<"OrderDelivery"> | number
+  arrivalTime?: Prisma.DateTimeFilter<"OrderDelivery"> | Date | string
+}
+
+export type OrderDeliveryCreateWithoutOrderInput = {
+  arrivalTime: Date | string
+  driver: Prisma.EmployeeCreateNestedOneWithoutOrderDeliveryInput
 }
 
 export type OrderDeliveryUncheckedCreateWithoutOrderInput = {
@@ -377,12 +476,32 @@ export type OrderDeliveryUpdateToOneWithWhereWithoutOrderInput = {
 }
 
 export type OrderDeliveryUpdateWithoutOrderInput = {
-  driverId?: Prisma.IntFieldUpdateOperationsInput | number
   arrivalTime?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  driver?: Prisma.EmployeeUpdateOneRequiredWithoutOrderDeliveryNestedInput
 }
 
 export type OrderDeliveryUncheckedUpdateWithoutOrderInput = {
   driverId?: Prisma.IntFieldUpdateOperationsInput | number
+  arrivalTime?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type OrderDeliveryCreateManyDriverInput = {
+  orderId: number
+  arrivalTime: Date | string
+}
+
+export type OrderDeliveryUpdateWithoutDriverInput = {
+  arrivalTime?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  order?: Prisma.OrderUpdateOneRequiredWithoutOrderDeliveryNestedInput
+}
+
+export type OrderDeliveryUncheckedUpdateWithoutDriverInput = {
+  orderId?: Prisma.IntFieldUpdateOperationsInput | number
+  arrivalTime?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type OrderDeliveryUncheckedUpdateManyWithoutDriverInput = {
+  orderId?: Prisma.IntFieldUpdateOperationsInput | number
   arrivalTime?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -393,6 +512,7 @@ export type OrderDeliverySelect<ExtArgs extends runtime.Types.Extensions.Interna
   driverId?: boolean
   arrivalTime?: boolean
   order?: boolean | Prisma.OrderDefaultArgs<ExtArgs>
+  driver?: boolean | Prisma.EmployeeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["orderDelivery"]>
 
 export type OrderDeliverySelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -400,6 +520,7 @@ export type OrderDeliverySelectCreateManyAndReturn<ExtArgs extends runtime.Types
   driverId?: boolean
   arrivalTime?: boolean
   order?: boolean | Prisma.OrderDefaultArgs<ExtArgs>
+  driver?: boolean | Prisma.EmployeeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["orderDelivery"]>
 
 export type OrderDeliverySelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -407,6 +528,7 @@ export type OrderDeliverySelectUpdateManyAndReturn<ExtArgs extends runtime.Types
   driverId?: boolean
   arrivalTime?: boolean
   order?: boolean | Prisma.OrderDefaultArgs<ExtArgs>
+  driver?: boolean | Prisma.EmployeeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["orderDelivery"]>
 
 export type OrderDeliverySelectScalar = {
@@ -418,18 +540,22 @@ export type OrderDeliverySelectScalar = {
 export type OrderDeliveryOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"orderId" | "driverId" | "arrivalTime", ExtArgs["result"]["orderDelivery"]>
 export type OrderDeliveryInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   order?: boolean | Prisma.OrderDefaultArgs<ExtArgs>
+  driver?: boolean | Prisma.EmployeeDefaultArgs<ExtArgs>
 }
 export type OrderDeliveryIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   order?: boolean | Prisma.OrderDefaultArgs<ExtArgs>
+  driver?: boolean | Prisma.EmployeeDefaultArgs<ExtArgs>
 }
 export type OrderDeliveryIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   order?: boolean | Prisma.OrderDefaultArgs<ExtArgs>
+  driver?: boolean | Prisma.EmployeeDefaultArgs<ExtArgs>
 }
 
 export type $OrderDeliveryPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "OrderDelivery"
   objects: {
     order: Prisma.$OrderPayload<ExtArgs>
+    driver: Prisma.$EmployeePayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     orderId: number
@@ -830,6 +956,7 @@ readonly fields: OrderDeliveryFieldRefs;
 export interface Prisma__OrderDeliveryClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   order<T extends Prisma.OrderDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.OrderDefaultArgs<ExtArgs>>): Prisma.Prisma__OrderClient<runtime.Types.Result.GetResult<Prisma.$OrderPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  driver<T extends Prisma.EmployeeDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.EmployeeDefaultArgs<ExtArgs>>): Prisma.Prisma__EmployeeClient<runtime.Types.Result.GetResult<Prisma.$EmployeePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.

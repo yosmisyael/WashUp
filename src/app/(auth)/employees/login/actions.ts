@@ -1,7 +1,7 @@
 'use server';
 
 import {z} from 'zod';
-import {createSession} from '@/lib/session';
+import {createSession} from '@/lib/session-repository';
 import prisma from '@/lib/prisma';
 import {redirect} from 'next/navigation';
 import {cookies} from "next/headers";

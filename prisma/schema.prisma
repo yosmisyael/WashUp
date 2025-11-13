@@ -90,6 +90,8 @@ model Employee {
   history         EmployeeHistory[]
   invoices        Invoice[]
   employeeSession EmployeeSession?
+  orderPickup     OrderPickup[]
+  orderDelivery   OrderDelivery[]
 
   @@map("employees")
 }
@@ -150,6 +152,7 @@ model OrderPickup {
   driverId   Int      @map("driver_id")
   pickupTime DateTime @map("pickup_time") @db.Timestamp(6)
   order      Order    @relation(fields: [orderId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  driver     Employee @relation(fields: [driverId], references: [id], onDelete: Cascade, onUpdate: Cascade)
 
   @@map("order_pickups")
 }
@@ -159,6 +162,7 @@ model OrderDelivery {
   driverId    Int      @map("driver_id")
   arrivalTime DateTime @map("arrival_time") @db.Timestamp(6)
   order       Order    @relation(fields: [orderId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  driver      Employee @relation(fields: [driverId], references: [id], onDelete: Cascade, onUpdate: Cascade)
 
   @@map("order_deliveries")
 }
