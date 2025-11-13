@@ -19,11 +19,20 @@ export function toTitleCase(input: string): string {
         .join(' ');
 }
 
-export function formatDate(dateObj: Date) {
+export function formatDate(dateObj: Date, withTime: boolean = false) {
     const day = String(dateObj.getDate()).padStart(2, '0');
     const month = String(dateObj.getMonth() + 1).padStart(2, '0');
     const year = dateObj.getFullYear();
-    return `${day}-${month}-${year}`;
+
+    let formattedDate = `${day}-${month}-${year}`;
+
+    if (withTime) {
+        const hours = String(dateObj.getHours()).padStart(2, '0');
+        const minutes = String(dateObj.getMinutes()).padStart(2, '0');
+        formattedDate += ` ${hours}:${minutes}`;
+    }
+
+    return formattedDate;
 }
 
 export function getInitials(name: string): string {
@@ -46,7 +55,26 @@ export function getInitials(name: string): string {
     return initials.toUpperCase();
 }
 
+<<<<<<< HEAD
 // Tambahkan ini agar komponen bisa pakai cn()
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
+=======
+export function formatLocalDatetime(date: Date | null | undefined): string {
+    if (!date || isNaN(date.getTime())) {
+        return '';
+    }
+
+    const pad = (num: number) => num.toString().padStart(2, '0');
+
+    const year = date.getFullYear();
+    const month = pad(date.getMonth() + 1);
+    const day = pad(date.getDate());
+
+    const hour = pad(date.getHours());
+    const minute = pad(date.getMinutes());
+
+    return `${year}-${month}-${day}T${hour}:${minute}`;
+}
+>>>>>>> fff4a377197751f12c581c27905ec6199eeec431

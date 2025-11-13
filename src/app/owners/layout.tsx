@@ -1,7 +1,7 @@
 import {OwnerSidebar} from '@/components/molecules/owners/OwnerSidebar';
 import Navbar from '@/components/molecules/Navbar';
 import {SidebarProvider} from "@/context/SidebarContext";
-import {getCurrentSession} from "@/lib/session";
+import {getCurrentSession} from "@/lib/session-repository";
 import {toTitleCase} from "@/lib/utils";
 
 export default async function OwnerLayout({

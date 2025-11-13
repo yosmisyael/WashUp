@@ -2,7 +2,7 @@ import React from 'react';
 import {ServicesHeader} from '@/components/molecules/owners/services/ServicesHeader';
 import {ServicesStats, ServicesStatsProps} from '@/components/organisms/owners/services/ServicesStats';
 import {ServicesTable, ServicesTableProps} from '@/components/organisms/owners/services/ServicesTable';
-import {getAllServices, getServiceStatistics} from "@/lib/services";
+import {getAllServices, getServiceStatistics} from "@/lib/services-repository";
 
 export default async function ServicesPage() {
     const serviceStats = await getServiceStatistics() as ServicesStatsProps;

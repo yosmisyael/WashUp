@@ -4,7 +4,7 @@ import Link from 'next/link';
 import Logo from '@/components/atoms/Logo';
 import {LayoutDashboard, Users, LogOut, ClipboardList, Truck, CircleUser} from 'lucide-react';
 import { usePathname } from 'next/navigation';
-import {deleteSession} from "@/lib/session";
+import {deleteSession} from "@/lib/session-repository";
 
 const navItems = [
     { name: 'Dashboard', href: '/employees/dashboard', icon: LayoutDashboard },
@@ -25,7 +25,7 @@ export function EmployeeSidebar() {
                 </div>
                 <div className="ml-3">
                     <span className="text-xl font-bold">WashUp</span>
-                    <p className="text-xs text-gray-300">Owner Portal</p>
+                    <p className="text-xs text-gray-300">Employee Portal</p>
                 </div>
             </div>
 
