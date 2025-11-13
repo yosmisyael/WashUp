@@ -1,189 +1,183 @@
 "use client";
 
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/atoms/Card";
-import Button from "@/components/atoms/Button";
+import React from "react";
+import Link from "next/link";
+import { Eye, Plus, Search, Filter } from "lucide-react";
 
-export default function OrderTrackingPage() {
+// Tipe data untuk Order
+type Order = {
+  id: string;
+  date: string;
+  items: string[];
+  total: string;
+  status: "Pending" | "Processing" | "Out for Delivery" | "Completed" | "Cancelled";
+  paymentStatus: "Paid" | "Unpaid";
+};
+
+// Data Mock (Data dummy yang merepresentasikan hasil dari halaman New Order)
+const orders: Order[] = [
+  {
+    id: "WU-2024-002",
+    date: "16 Mar 2024",
+    items: ["Wash & Fold (5kg)", "Dry Cleaning (2pcs)", "Press Only (1pcs)"],
+    total: "$39.27",
+    status: "Pending",
+    paymentStatus: "Unpaid",
+  },
+  {
+    id: "WU-2024-001",
+    date: "15 Mar 2024",
+    items: ["Wash & Fold", "Dry Cleaning (2 shirts)"],
+    total: "$47.00",
+    status: "Processing",
+    paymentStatus: "Paid",
+  },
+  {
+    id: "WU-2024-000",
+    date: "10 Mar 2024",
+    items: ["Shoe Cleaning (2 pairs)"],
+    total: "$24.00",
+    status: "Completed",
+    paymentStatus: "Paid",
+  },
+];
+
+export default function OrderListPage() {
+  
+  // Helper untuk warna badge status
+  const getStatusColor = (status: string) => {
+    switch (status) {
+      case "Pending":
+        return "bg-yellow-100 text-yellow-800 border-yellow-200";
+      case "Processing":
+        return "bg-blue-100 text-blue-800 border-blue-200";
+      case "Out for Delivery":
+        return "bg-purple-100 text-purple-800 border-purple-200";
+      case "Completed":
+        return "bg-green-100 text-green-800 border-green-200";
+      case "Cancelled":
+        return "bg-red-100 text-red-800 border-red-200";
+      default:
+        return "bg-gray-100 text-gray-800 border-gray-200";
+    }
+  };
+
   return (
-    <section className="min-h-screen w-full bg-gray-50 py-10 px-6">
-      <div className="w-full max-w-6xl mx-auto space-y-6">
-        {/* Header */}
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+    <section className="min-h-screen w-full bg-gray-50 py-10 px-4 sm:px-6 lg:px-8">
+      <div className="w-full max-w-7xl mx-auto space-y-6">
+        
+        {/* Header Section */}
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <div>
-            <h1 className="text-3xl font-bold text-gray-800">Order Tracking</h1>
-            <p className="text-sm text-gray-500">
-              Track your order progress in real-time
+            <h1 className="text-2xl font-bold text-gray-900">My Orders</h1>
+            <p className="text-sm text-gray-500 mt-1">
+              Manage and track your laundry orders
             </p>
           </div>
-          <span className="px-3 py-1 text-sm rounded-full bg-blue-100 text-blue-700 font-medium self-start sm:self-center">
-            In Progress
-          </span>
+          <Link 
+            href="/customers/new-order"
+            className="inline-flex items-center justify-center px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 transition-colors shadow-sm gap-2"
+          >
+            <Plus size={18} />
+            Create New Order
+          </Link>
         </div>
 
-        {/* Order Info */}
-        <div className="text-sm text-gray-600">
-          <p>
-            <span className="font-semibold">Order #WU-2024-001</span> • Placed on
-            March 15, 2024 at 2:30 PM
-          </p>
+        {/* Filters & Search Bar */}
+        <div className="flex flex-col sm:flex-row gap-4 bg-white p-4 rounded-xl border border-gray-200 shadow-sm">
+          <div className="relative flex-1">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5" />
+            <input 
+              type="text" 
+              placeholder="Search by Order ID..." 
+              className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none text-sm"
+            />
+          </div>
+          <button className="flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 text-gray-700 text-sm font-medium transition-colors">
+            <Filter size={18} />
+            Filter Status
+          </button>
         </div>
 
-        {/* Layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          {/* Left Column - Progress */}
-          <Card className="lg:col-span-2 shadow-sm border rounded-xl">
-            <CardHeader>
-              <CardTitle>Order Progress</CardTitle>
-            </CardHeader>
-            <CardContent className="relative pb-6">
-              <div className="relative border-l-2 border-gray-200 ml-4 space-y-10">
-                {/* Step 1 */}
-                <div className="relative pl-8">
-                  <div className="absolute left-[-13px] top-1 w-5 h-5 rounded-full bg-blue-600 border-2 border-white"></div>
-                  <h3 className="font-semibold text-gray-800">Order Accepted</h3>
-                  <p className="text-sm text-gray-500">
-                    March 15, 2024 at 2:35 PM
-                  </p>
-                  <p className="text-sm text-gray-600">
-                    Your order has been confirmed and accepted
-                  </p>
-                </div>
-
-                {/* Step 2 */}
-                <div className="relative pl-8">
-                  <div className="absolute left-[-13px] top-1 w-5 h-5 rounded-full bg-blue-600 border-2 border-white"></div>
-                  <h3 className="font-semibold text-gray-800">
-                    On the way to pick up
-                  </h3>
-                  <p className="text-sm text-gray-500">
-                    March 15, 2024 at 3:00 PM
-                  </p>
-                  <p className="text-sm text-gray-600">
-                    Our driver is heading to your pickup location
-                  </p>
-                </div>
-
-                {/* Step 3 */}
-                <div className="relative pl-8">
-                  <div className="absolute left-[-13px] top-1 w-5 h-5 rounded-full bg-blue-500 border-2 border-white animate-pulse"></div>
-                  <h3 className="font-semibold text-gray-800">In Progress</h3>
-                  <p className="text-sm text-gray-500">Currently processing...</p>
-                  <p className="text-sm text-gray-600">
-                    Your laundry is being processed at our facility
-                  </p>
-                </div>
-
-                {/* Step 4 */}
-                <div className="relative pl-8 opacity-60">
-                  <div className="absolute left-[-13px] top-1 w-5 h-5 rounded-full bg-gray-300 border-2 border-white"></div>
-                  <h3 className="font-semibold text-gray-800">
-                    Processing Complete
-                  </h3>
-                  <p className="text-sm text-gray-600">
-                    Your laundry will be ready for delivery
-                  </p>
-                </div>
-
-                {/* Step 5 */}
-                <div className="relative pl-8 opacity-60">
-                  <div className="absolute left-[-13px] top-1 w-5 h-5 rounded-full bg-gray-300 border-2 border-white"></div>
-                  <h3 className="font-semibold text-gray-800">
-                    Out for Delivery
-                  </h3>
-                  <p className="text-sm text-gray-600">
-                    Your clean laundry is on the way
-                  </p>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-
-          {/* Right Column */}
-          <div className="space-y-4">
-            {/* Order Details */}
-            <Card className="shadow-sm border rounded-xl">
-              <CardHeader>
-                <CardTitle>Order Details</CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-3 text-sm text-gray-700">
-                <div>
-                  <p className="font-semibold">Pickup Location</p>
-                  <p>123 Main Street, Apt 4B</p>
-                  <p>Brooklyn, NY 11225</p>
-                </div>
-                <div>
-                  <p className="font-semibold">Delivery Location</p>
-                  <p>128 Willow Street, Apt 4B</p>
-                  <p>Queens, NY 11426</p>
-                </div>
-                <div>
-                  <p className="font-semibold">Expected Delivery</p>
-                  <p>March 16, 2024 between 2:00 PM - 5:00 PM</p>
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* Item Summary */}
-            <Card className="shadow-sm border rounded-xl">
-              <CardHeader>
-                <CardTitle>Item Summary</CardTitle>
-              </CardHeader>
-              <CardContent className="text-sm text-gray-700">
-                <div className="space-y-2">
-                  <div className="flex justify-between">
-                    <p>Wash & Fold</p>
-                    <p>$15.00</p>
-                  </div>
-                  <div className="flex justify-between">
-                    <p>Dry Cleaning (2 shirts)</p>
-                    <p>$24.00</p>
-                  </div>
-                  <div className="flex justify-between">
-                    <p>Express Service</p>
-                    <p>$8.00</p>
-                  </div>
-                  <hr className="my-2" />
-                  <div className="flex justify-between font-semibold">
-                    <p>Total</p>
-                    <p>$47.00</p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* Payment Status */}
-            <Card className="shadow-sm border rounded-xl">
-              <CardHeader>
-                <CardTitle>Payment Status</CardTitle>
-              </CardHeader>
-              <CardContent className="text-sm text-gray-700 space-y-2">
-                <div className="flex justify-between">
-                  <p>Invoice Total</p>
-                  <p className="font-semibold">$47.00</p>
-                </div>
-                <div className="flex justify-between">
-                  <p>Payment Status</p>
-                  <p className="text-green-600 font-semibold">Paid</p>
-                </div>
-                <div className="flex justify-between">
-                  <p>Payment Method</p>
-                  <p>Credit Card ****1234</p>
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* Support */}
-            <Card className="bg-blue-50 border-blue-100 rounded-xl">
-              <CardContent className="text-center p-6 space-y-3">
-                <p className="text-gray-700 text-sm leading-relaxed">
-                  Contact our support team if you have any questions about your
-                  order.
-                </p>
-                <Button className="bg-blue-600 hover:bg-blue-700 text-white w-full py-3 rounded-full text-sm font-semibold">
-                  Contact Support
-                </Button>
-              </CardContent>
-            </Card>
+        {/* Table Section */}
+        <div className="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden">
+          <div className="overflow-x-auto">
+            <table className="w-full text-left border-collapse">
+              <thead>
+                <tr className="bg-gray-50 border-b border-gray-200 text-xs uppercase text-gray-500 font-semibold tracking-wider">
+                  <th className="px-6 py-4">Order ID</th>
+                  <th className="px-6 py-4">Date</th>
+                  <th className="px-6 py-4">Items Summary</th>
+                  <th className="px-6 py-4">Total</th>
+                  <th className="px-6 py-4">Payment</th>
+                  <th className="px-6 py-4">Status</th>
+                  <th className="px-6 py-4 text-right">Action</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-gray-200">
+                {orders.map((order) => (
+                  <tr key={order.id} className="hover:bg-gray-50 transition-colors group">
+                    <td className="px-6 py-4">
+                      <span className="font-medium text-gray-900">{order.id}</span>
+                    </td>
+                    <td className="px-6 py-4 text-sm text-gray-600">
+                      {order.date}
+                    </td>
+                    <td className="px-6 py-4 text-sm text-gray-600">
+                      <div className="flex flex-col">
+                        <span className="line-clamp-1">{order.items.join(", ")}</span>
+                        {order.items.length > 2 && (
+                          <span className="text-xs text-gray-400 mt-1">
+                            +{order.items.length - 2} more items
+                          </span>
+                        )}
+                      </div>
+                    </td>
+                    <td className="px-6 py-4 font-medium text-gray-900">
+                      {order.total}
+                    </td>
+                    <td className="px-6 py-4">
+                      <span className={`text-xs font-medium px-2.5 py-0.5 rounded-full ${
+                        order.paymentStatus === "Paid" 
+                          ? "bg-green-100 text-green-700" 
+                          : "bg-yellow-100 text-yellow-700"
+                      }`}>
+                        {order.paymentStatus}
+                      </span>
+                    </td>
+                    <td className="px-6 py-4">
+                      <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium border ${getStatusColor(order.status)}`}>
+                        <span className={`w-1.5 h-1.5 rounded-full mr-1.5 ${
+                            order.status === "Completed" ? "bg-green-500" : 
+                            order.status === "Processing" ? "bg-blue-500" :
+                            order.status === "Pending" ? "bg-yellow-500" : "bg-gray-500"
+                        }`}></span>
+                        {order.status}
+                      </span>
+                    </td>
+                    <td className="px-6 py-4 text-right">
+                      <button className="text-gray-400 hover:text-blue-600 transition-colors p-1 rounded-md hover:bg-blue-50">
+                        <Eye size={20} />
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          
+          {/* Pagination / Empty State */}
+          {orders.length === 0 && (
+            <div className="p-8 text-center text-gray-500">
+              No orders found. Start by creating a new order!
+            </div>
+          )}
+          <div className="px-6 py-4 border-t border-gray-200 bg-gray-50 flex items-center justify-between text-sm text-gray-600">
+             <span>Showing {orders.length} orders</span>
+             <div className="flex gap-2">
+               <button className="px-3 py-1 border border-gray-300 rounded hover:bg-white disabled:opacity-50" disabled>Previous</button>
+               <button className="px-3 py-1 border border-gray-300 rounded hover:bg-white disabled:opacity-50" disabled>Next</button>
+             </div>
           </div>
         </div>
       </div>
