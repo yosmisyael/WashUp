@@ -39,10 +39,10 @@ export function OrderItemCart({ serviceItem, onRemove }: { serviceItem: ServiceP
 
                 {/* Description */}
                 <p
-                    className="
+                    className="text-left
           text-sm text-gray-500
-          line-clamp-2  /* Ensures description is max 2 lines */
-          flex-grow     /* Helps align content if cards are in a grid */
+          line-clamp-2
+          flex-grow
         "
                 >
                     {serviceItem.descriptions}

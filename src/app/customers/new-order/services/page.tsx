@@ -6,40 +6,6 @@ import {ServiceProp, useOrderContext} from "@/app/customers/new-order/order-cont
 import {OrderItemCart} from "@/components/molecules/customers/new-orders/OrderItemCart";
 import {useRouter} from "next/navigation";
 
-const TShirtIcon = ({className = "w-6 h-6"}: { className?: string }) => (
-    <svg
-        xmlns="http://www.w3.org/2000/svg"
-        fill="none"
-        viewBox="0 0 24 24"
-        strokeWidth={1.5}
-        stroke="currentColor"
-        className={`text-blue-600 ${className}`}
-    >
-        <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M9.75 17L9 13.895V7.875C9 5.764 10.764 4 12.875 4H13.125C15.236 4 17 5.764 17 7.875V13.895l-.75 3.105A3 3 0 1113.5 15v2.25a3 3 0 11-6 0V15a3 3 0 11-2.646-2.875L9.75 17z"
-        />
-    </svg>
-);
-
-const DryCleanIcon = ({className = "w-6 h-6"}: { className?: string }) => (
-    <svg
-        xmlns="http://www.w3.org/2000/svg"
-        fill="none"
-        viewBox="0 0 24 24"
-        strokeWidth={1.5}
-        stroke="currentColor"
-        className={`text-purple-600 ${className}`}
-    >
-        <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.995c-.076-.394-.291-.719-.626-.924-.335-.206-.74-.294-1.15-.222s-.78.28-.998.624l-1.125 1.875a3.375 3.375 0 106.75 0zm-6.75 0a3.375 3.375 0 106.75 0c0 .533-.167 1.067-.5 1.594-.333.526-.847.95-1.458 1.184a3.375 3.375 0 10-6.75 0c-.533 0-1.067.167-1.594.5-.526.333-.95.847-1.184 1.458a3.375 3.375 0 106.75 0z"
-        />
-    </svg>
-);
-
 const IronIcon = ({className = "w-6 h-6"}: { className?: string }) => (
     <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -58,23 +24,6 @@ const IronIcon = ({className = "w-6 h-6"}: { className?: string }) => (
             strokeLinecap="round"
             strokeLinejoin="round"
             d="M15.75 15.75c0 1.127-.913 2.04-2.04 2.04h-1.02c-1.127 0-2.04-.913-2.04-2.04v-1.02c0-1.127.913-2.04 2.04-2.04h1.02c1.127 0 2.04.913 2.04 2.04v1.02z"
-        />
-    </svg>
-);
-
-const ExpressIcon = ({className = "w-6 h-6"}: { className?: string }) => (
-    <svg
-        xmlns="http://www.w3.org/2000/svg"
-        fill="none"
-        viewBox="0 0 24 24"
-        strokeWidth={1.5}
-        stroke="currentColor"
-        className={`text-red-600 ${className}`}
-    >
-        <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M13 9L19 3M19 3L13 9M19 3V9M9 15l-6 6M6 21h6M9 15v6"
         />
     </svg>
 );

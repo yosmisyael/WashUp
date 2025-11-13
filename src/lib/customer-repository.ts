@@ -13,7 +13,6 @@ export async function getAllCustomers() {
 }
 
 export async function getCustomerById(customerId: number) {
-    console.log("getting customer by id", customerId);
     return prisma.customer.findUnique({
         where: {
             id: customerId,
@@ -24,6 +23,19 @@ export async function getCustomerById(customerId: number) {
             email: true,
             phone: true,
             createdAt: true,
+        }
+    });
+}
+
+export async function getCustomerLocations(customerId: number) {
+    return prisma.location.findMany({
+        where: {
+            customerId: customerId,
+        },
+        select: {
+            id: true,
+            address: true,
+            information: true,
         }
     });
 }
