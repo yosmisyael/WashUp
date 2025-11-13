@@ -17,7 +17,7 @@ export default function Sidebar() {
         lg:translate-x-0`}
       >
         {/* Brand Header */}
-        <div className="flex items-center gap-3 px-6 py-[0.4rem] primary-color">
+        <div className="flex items-center h-20 gap-3 px-6 py-[0.4rem] primary-color">
           <div className="bg-white text-white font-bold text-xl p-1.5 rounded-md">
             <Logo size={1.5} />
           </div>

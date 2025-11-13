@@ -113,7 +113,6 @@ export default function LoginForm({ flashMessage, formTitle, formDesc, action }:
                         id='agree'
                         type='checkbox'
                         className='h-4 w-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500 mt-0.5'
-                        required
                     />
                     <label htmlFor='agree' className='text-sm text-gray-600'>
                         Remember me

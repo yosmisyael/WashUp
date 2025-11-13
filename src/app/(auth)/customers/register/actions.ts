@@ -57,5 +57,5 @@ export async function customerRegister (
 
     cookie.set('flash_message', 'Account created successfully. Now please login.')
 
-    redirect('/auth/login');
+    redirect('/customers/login');
 }

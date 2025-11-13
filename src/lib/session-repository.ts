@@ -23,8 +23,14 @@ export async function createSession(jwtPayload: JwtPayloadSession) {
             }
         })
     } else {
-        await prisma.customerSession.create({
-            data: {
+        await prisma.customerSession.upsert({
+            where: {
+                customerId: parseInt(jwtPayload.sub!),
+            },
+            update: {
+                token
+            },
+            create: {
                 token,
                 customerId: parseInt(jwtPayload.sub!),
             }
