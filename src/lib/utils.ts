@@ -1,3 +1,7 @@
+// src/lib/utils.ts
+import { type ClassValue, clsx } from "clsx"
+import { twMerge } from "tailwind-merge"
+
 export function toTitleCase(input: string): string {
     if (!input) {
         return "";
@@ -40,4 +44,9 @@ export function getInitials(name: string): string {
     }
 
     return initials.toUpperCase();
+}
+
+// Tambahkan ini agar komponen bisa pakai cn()
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs))
 }
