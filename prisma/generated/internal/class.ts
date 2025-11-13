@@ -23,7 +23,7 @@ const config: runtime.GetPrismaClientConfig = {
       "value": "prisma-client"
     },
     "output": {
-      "value": "C:\\Users\\Erick\\OneDrive\\Desktop\\clone ulang\\WashUp\\prisma\\generated",
+      "value": "/home/yosev/Course/Advanced Database/02/assignment/WashUp/washup/prisma/generated",
       "fromEnvVar": null
     },
     "config": {
@@ -33,12 +33,12 @@ const config: runtime.GetPrismaClientConfig = {
     "binaryTargets": [
       {
         "fromEnvVar": null,
-        "value": "windows",
+        "value": "debian-openssl-3.0.x",
         "native": true
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "C:\\Users\\Erick\\OneDrive\\Desktop\\clone ulang\\WashUp\\prisma\\schema.prisma",
+    "sourceFilePath": "/home/yosev/Course/Advanced Database/02/assignment/WashUp/washup/prisma/schema.prisma",
     "isCustomOutput": true
   },
   "relativePath": "..",
@@ -48,6 +48,7 @@ const config: runtime.GetPrismaClientConfig = {
     "db"
   ],
   "activeProvider": "postgresql",
+  "postinstall": false,
   "inlineDatasources": {
     "db": {
       "url": {

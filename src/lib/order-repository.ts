@@ -83,6 +83,7 @@ async function _getOrderDetailsQuery(orderId: number) {
             invoice: {
                 select: { id: true, isPaid: true, payment: true },
             },
+
         },
     });
 

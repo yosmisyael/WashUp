@@ -21,6 +21,7 @@ import {UpdatePickupForm} from "@/components/organisms/employees/UpdatePickupFor
 import {getAllEmployees} from "@/lib/employee-repository";
 import {UpdateDeliverForm} from "@/components/organisms/employees/UpdateDeliverForm";
 import Button from "@/components/atoms/Button";
+import {ORDER_TYPE} from "../../../../../prisma/generated/enums";
 
 export default async function ManageOrderPage({params}: { params: Promise<{ id: string }> }) {
     const {id} = await params;
@@ -200,7 +201,7 @@ export default async function ManageOrderPage({params}: { params: Promise<{ id: 
                             {/* Pickup Assignment */}
                             <div className="p-4 bg-green-50 rounded-lg">
                                 <p className="text-sm font-medium text-green-700 mb-2">Pickup Assignment</p>
-                                {!isDone ? (
+                                {!isDone && orderDetails.order.type == ORDER_TYPE.delivery ? (
                                     <UpdatePickupForm
                                         orderId={parseInt(id)}
                                         driverList={driverData}
@@ -227,7 +228,7 @@ export default async function ManageOrderPage({params}: { params: Promise<{ id: 
                             {/* Delivery Assignment */}
                             <div className="p-4 bg-blue-50 rounded-lg">
                                 <p className="text-sm font-medium text-blue-700 mb-2 ">Delivery Assignment</p>
-                                {!isDone ? (
+                                {!isDone && orderDetails.order.type == ORDER_TYPE.delivery ? (
                                     <UpdateDeliverForm
                                         orderId={parseInt(id)}
                                         driverList={driverData}
