@@ -4,7 +4,7 @@ import Link from 'next/link';
 import Logo from '@/components/atoms/Logo';
 import { LayoutDashboard, Users, ShoppingBag, Tag, LogOut } from 'lucide-react';
 import { usePathname } from 'next/navigation';
-import {deleteSession} from "@/lib/session";
+import {deleteSession} from "@/lib/session-repository";
 
 const navItems = [
   { name: 'Dashboard', href: '/owners/dashboard', icon: LayoutDashboard },
